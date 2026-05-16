@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7b84b" />
+    <meta name="description" content="Sauerteig Love: PWA fuer Starterpflege, Rezepte, Lerninhalte und Backplanung." />
+    <title>Sauerteig Love</title>
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="hero">
+        <div class="brand-lockup">
+          <span class="brand-mark" aria-hidden="true">
+            <span></span>
+          </span>
+          <div>
+            <p class="eyebrow">Euer Sauerteig-Begleiter</p>
+            <h1>Sauerteig Love</h1>
+          </div>
+        </div>
+        <button class="ghost-button compact" id="installButton" hidden>Installieren</button>
+      </header>
+
+      <section class="pet-dashboard" aria-label="Starter Status">
+        <div class="pet-copy">
+          <p class="eyebrow">Gemeinsamer Starter</p>
+          <label class="starter-name-label" for="starterName">Name</label>
+          <div class="name-row">
+            <input id="starterName" type="text" maxlength="22" autocomplete="off" />
+            <button id="saveName" class="primary-button">Speichern</button>
+          </div>
+          <div class="status-strip">
+            <span class="status-dot" id="statusDot"></span>
+            <strong id="petStatusLabel">Aktiv</strong>
+          </div>
+          <p id="petMessage" class="pet-message"></p>
+          <div class="quick-actions">
+            <button id="quickFed" class="secondary-button">Gerade gefüttert</button>
+            <button id="quickCalendar" class="ghost-button">Kalender</button>
+          </div>
+        </div>
+        <div class="pet-stage-wrap">
+          <div id="petStage" class="pet-stage" aria-live="polite"></div>
+          <p id="nextFeedingText" class="next-feeding"></p>
+        </div>
+      </section>
+
+      <nav class="tabs" aria-label="Hauptbereiche">
+        <button class="tab active" data-section="lernen">Lernen</button>
+        <button class="tab" data-section="rezepte">Rezepte</button>
+        <button class="tab" data-section="starter">Starter</button>
+        <button class="tab" data-section="planer">Planer</button>
+      </nav>
+
+      <main>
+        <section class="panel active" id="lernen" aria-labelledby="lernenTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Grundlagen</p>
+              <h2 id="lernenTitle">Anleitungen und How-Dos</h2>
+            </div>
+            <a class="text-link" href="#quellen">Quellen</a>
+          </div>
+          <div class="intro-band">
+            <strong>Sanfter Einstieg:</strong>
+            <span>Die App erklärt Sauerteig so, dass ihr nicht erst zehn Tabs offen haben müsst. Erst verstehen, dann backen.</span>
+          </div>
+          <div class="guide-grid" id="guideGrid"></div>
+          <h3>Video-Empfehlungen</h3>
+          <div class="video-grid" id="videoGrid"></div>
+          <h3>Sauerteig-Wörterbuch</h3>
+          <div class="glossary-grid" id="glossaryGrid"></div>
+        </section>
+
+        <section class="panel" id="rezepte" aria-labelledby="rezepteTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Klassiker und Ideen</p>
+              <h2 id="rezepteTitle">Rezepte</h2>
+            </div>
+            <span class="count-pill" id="recipeCount"></span>
+          </div>
+          <div class="filters" aria-label="Rezeptfilter">
+            <label>
+              Suche
+              <input id="recipeSearch" type="search" placeholder="Brot, Pizza, Roggen ..." />
+            </label>
+            <label>
+              Kategorie
+              <select id="categoryFilter">
+                <option value="alle">Alle</option>
+                <option value="klassiker">Klassische Brote</option>
+                <option value="alternative">Alternativen</option>
+                <option value="favoriten">Herzen</option>
+                <option value="spaeter">Später backen</option>
+              </select>
+            </label>
+            <label>
+              Schwierigkeit
+              <select id="difficultyFilter">
+                <option value="alle">Alle</option>
+                <option value="Einfach">Einfach</option>
+                <option value="Mittel">Mittel</option>
+                <option value="Anspruchsvoll">Anspruchsvoll</option>
+              </select>
+            </label>
+          </div>
+          <div class="recipe-grid" id="recipeGrid"></div>
+        </section>
+
+        <section class="panel" id="starter" aria-labelledby="starterTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Pflege und Pet</p>
+              <h2 id="starterTitle">Starter & Pet</h2>
+            </div>
+            <button id="exportFeedingIcs" class="primary-button">Fütterungen exportieren</button>
+          </div>
+
+          <div class="settings-grid">
+            <article class="settings-card">
+              <h3>Pet auswählen</h3>
+              <div class="pet-picker" id="petPicker"></div>
+            </article>
+
+            <article class="settings-card">
+              <h3>Fütterung</h3>
+              <div class="form-stack">
+                <label>
+                  Modus
+                  <select id="starterMode">
+                    <option value="new">Neue Anzucht</option>
+                    <option value="existing">Bestehender Starter</option>
+                  </select>
+                </label>
+                <label>
+                  Rhythmus
+                  <select id="feedInterval">
+                    <option value="12">Alle 12 Stunden</option>
+                    <option value="24">Täglich</option>
+                    <option value="168">Wöchentlich</option>
+                    <option value="custom">Frei einstellen</option>
+                  </select>
+                </label>
+                <label id="customFeedWrap" hidden>
+                  Freier Rhythmus in Stunden
+                  <input id="customFeedHours" type="number" min="1" max="720" step="1" />
+                </label>
+                <label>
+                  Zuletzt gefüttert
+                  <input id="lastFed" type="datetime-local" />
+                </label>
+                <label>
+                  Kalenderexport
+                  <select id="feedingExportRange">
+                    <option value="next">Nur nächste Fütterung</option>
+                    <option value="week">Nächste 7 Tage</option>
+                    <option value="month">Ganzer Monat</option>
+                  </select>
+                </label>
+                <button id="fedNow" class="secondary-button">Jetzt als gefüttert speichern</button>
+              </div>
+            </article>
+          </div>
+
+          <article class="care-card">
+            <div>
+              <p class="eyebrow">Was jetzt wichtig ist</p>
+              <h3 id="careTitle">Starter beobachten</h3>
+              <p id="careText"></p>
+            </div>
+            <div class="care-meter" aria-label="Reifegrad">
+              <span id="careMeterFill"></span>
+            </div>
+          </article>
+
+          <h3>Anzuchtplan</h3>
+          <div class="care-timeline" id="careTimeline"></div>
+        </section>
+
+        <section class="panel" id="planer" aria-labelledby="planerTitle">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Zeitplan</p>
+              <h2 id="planerTitle">Backplaner</h2>
+            </div>
+            <button id="exportPlanIcs" class="primary-button" disabled>Plan exportieren</button>
+          </div>
+
+          <div class="planner-grid">
+            <article class="settings-card">
+              <h3>Plan berechnen</h3>
+              <div class="form-stack">
+                <label>
+                  Rezept
+                  <select id="plannerRecipe"></select>
+                </label>
+                <fieldset class="segmented" aria-label="Planungsrichtung">
+                  <legend>Planung</legend>
+                  <label>
+                    <input type="radio" name="planDirection" value="finish" checked />
+                    Fertig um
+                  </label>
+                  <label>
+                    <input type="radio" name="planDirection" value="start" />
+                    Starten um
+                  </label>
+                </fieldset>
+                <label>
+                  Zeitpunkt
+                  <input id="plannerDate" type="datetime-local" />
+                </label>
+                <button id="calculatePlan" class="secondary-button">Backplan berechnen</button>
+              </div>
+            </article>
+
+            <article class="plan-summary" id="planSummary">
+              <p class="eyebrow">Noch kein Plan</p>
+              <h3>Wählt Rezept und Zeitpunkt.</h3>
+              <p>Danach rechnet die App vorwärts oder rückwärts und erstellt Kalendertermine für alle wichtigen Schritte.</p>
+            </article>
+          </div>
+
+          <div class="plan-list" id="planList"></div>
+        </section>
+
+        <section class="sources" id="quellen">
+          <h2>Quellen und Bildnachweise</h2>
+          <p>Die Lernlogik orientiert sich an etablierten Sauerteig-Guides. Bilder stammen aus frei nutzbaren Pexels-Fotos und werden direkt aus dem Web geladen.</p>
+          <ul>
+            <li><a href="https://www.kingarthurbaking.com/learn/guides/sourdough/maintain" target="_blank" rel="noreferrer">King Arthur Baking: Starterpflege</a></li>
+            <li><a href="https://www.kingarthurbaking.com/blog/2024/02/28/beginner-sourdough-guide" target="_blank" rel="noreferrer">King Arthur Baking: Beginner Guide</a></li>
+            <li><a href="https://www.theperfectloaf.com/sourdough/" target="_blank" rel="noreferrer">The Perfect Loaf: Beginner's Guide</a></li>
+            <li><a href="https://www.brooot.de/weizenbrote/sauerteig-backkurs-fuer-anfaenger-sauerteig-weizenbrot-level-1/" target="_blank" rel="noreferrer">Brooot: Sauerteig-Backkurs</a></li>
+            <li><a href="https://www.pexels.com/" target="_blank" rel="noreferrer">Pexels: Rezeptbilder</a></li>
+          </ul>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="recipe-dialog" id="recipeDialog">
+      <div class="dialog-content">
+        <button class="icon-close" id="closeRecipeDialog" aria-label="Schließen">×</button>
+        <div id="recipeDetail"></div>
+      </div>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
