@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Sauerteig Love Icon">
+  <rect width="512" height="512" rx="96" fill="#fff8ec"/>
+  <circle cx="122" cy="116" r="56" fill="#8ac7a4"/>
+  <circle cx="390" cy="118" r="48" fill="#5a8fb5"/>
+  <path fill="#f7b84b" d="M126 196c0-41 33-74 74-74h112c41 0 74 33 74 74v160c0 46-37 83-83 83h-94c-46 0-83-37-83-83V196Z"/>
+  <path fill="#fffdf8" fill-opacity=".48" d="M164 202c0-24 19-43 43-43h98c24 0 43 19 43 43v34H164v-34Z"/>
+  <path fill="#d99047" d="M126 266h260v90c0 46-37 83-83 83h-94c-46 0-83-37-83-83v-90Z"/>
+  <rect x="180" y="86" width="152" height="58" rx="20" fill="#bc5268"/>
+  <circle cx="214" cy="306" r="14" fill="#31251d"/>
+  <circle cx="298" cy="306" r="14" fill="#31251d"/>
+  <path fill="#31251d" d="M222 346c20 23 48 23 68 0 6-7 17 0 13 9-9 21-27 34-47 34s-38-13-47-34c-4-9 7-16 13-9Z"/>
+  <circle cx="184" cy="334" r="16" fill="#f08f5f" fill-opacity=".58"/>
+  <circle cx="328" cy="334" r="16" fill="#f08f5f" fill-opacity=".58"/>
+  <circle cx="204" cy="240" r="14" fill="#fffdf8" fill-opacity=".42"/>
+  <circle cx="284" cy="226" r="10" fill="#fffdf8" fill-opacity=".42"/>
+  <circle cx="316" cy="256" r="8" fill="#fffdf8" fill-opacity=".42"/>
+</svg>
