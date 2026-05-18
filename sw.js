@@ -1,9 +1,10 @@
-const CACHE_NAME = "sauerteig-love-v2";
+const CACHE_NAME = "sauerteig-love-v3";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./styles.css",
   "./overrides.css",
+  "./pet-fixes.css",
   "./app.js",
   "./customizations.js",
   "./manifest.webmanifest",
