@@ -2,7 +2,7 @@
   const STORE_KEY = "sauerteig-love-state-v1";
   const LEGACY_PETS = ["jarling", "blobbi", "krusti", "blubbi", "wolki", "codex-blue", "codex-sprout", "codex-toast"];
   const PETS = [
-    { id: "sourdough-crumb", name: "Broesel", label: "Weicher Teigfreund", className: "custom-pet-crumb" },
+    { id: "sourdough-crumb", name: "Brösel", label: "Weicher Teigfreund", className: "custom-pet-crumb" },
     { id: "sourdough-rye", name: "Krusti", label: "Roggenlaib", className: "custom-pet-rye" },
     { id: "sourdough-starter", name: "Blubbi", label: "Starterkern", className: "custom-pet-starter" },
   ];
@@ -27,9 +27,9 @@
 
   function currentStatus() {
     const label = document.querySelector("#petStatusLabel")?.textContent || "";
-    if (label.includes("ÃœberfÃ¤llig") || label.includes("Ueberfaellig")) return "overdue";
+    if (label.includes("Überfällig") || label.includes("Ueberfaellig")) return "overdue";
     if (label.includes("Hungrig")) return "hungry";
-    if (label.includes("SchlÃ¤ft") || label.includes("Schlaeft")) return "sleeping";
+    if (label.includes("Schläft") || label.includes("Schlaeft")) return "sleeping";
     if (label.includes("Bereit")) return "ready";
     return "active";
   }
@@ -180,7 +180,7 @@
     select.value = recipeId;
     document.querySelector('[data-section="planer"]')?.click();
     document.querySelector("#plannerDate")?.focus();
-    showToast(`${option.textContent.trim()} ist im Planer ausgewaehlt.`);
+    showToast(`${option.textContent.trim()} ist im Planer ausgewählt.`);
   }
 
   function bindStarterEvents() {
@@ -251,7 +251,7 @@
 
   function migrateState() {
     const state = readState();
-    if (!state.petId || LEGACY_PETS.includes(state.petId)) {
+    if (!state.petId || LEGACY_PETS.includes(state.petId) || !PETS.some((pet) => pet.id === state.petId)) {
       writeState({ petId: PETS[0].id });
     }
   }
