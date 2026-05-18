@@ -1,4 +1,4 @@
-const CACHE_NAME = "sauerteig-love-v11";
+const CACHE_NAME = "sauerteig-love-v16";
 const APP_SHELL = [
   "./",
   "./index.html",

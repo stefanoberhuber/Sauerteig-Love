@@ -60,8 +60,8 @@
 
 .single-pet {
   position: relative;
-  width: min(196px, 76vw);
-  height: min(196px, 76vw);
+  width: min(218px, 80vw);
+  height: min(218px, 80vw);
   display: grid;
   place-items: center;
   isolation: isolate;
@@ -75,20 +75,20 @@
 }
 
 .pet-bob {
-  transform-origin: 100px 155px;
+  transform-origin: 100px 164px;
   animation: pet-breathe 2.8s ease-in-out infinite;
 }
 
 .pet-ground-shadow {
   fill: rgba(92, 60, 28, 0.16);
-  transform-origin: 100px 184px;
+  transform-origin: 100px 188px;
   animation: pet-shadow-pulse 2.8s ease-in-out infinite;
 }
 
 .cloth-top,
 .cloth-skirt {
   stroke: #4a2914;
-  stroke-width: 4.5;
+  stroke-width: 4.6;
   stroke-linejoin: round;
 }
 
@@ -100,37 +100,49 @@
   fill: url("#clothSkirtFill");
 }
 
+.cloth-texture {
+  fill: none;
+  stroke: rgba(208, 163, 97, 0.42);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
 .twine-line,
 .bow-loop,
 .bow-tail {
   fill: none;
   stroke: url("#twineFill");
-  stroke-width: 6.5;
+  stroke-width: 6.8;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .bow-knot {
-  fill: #bf7125;
+  fill: #c77720;
   stroke: #4a2914;
-  stroke-width: 3.8;
+  stroke-width: 3.4;
 }
 
 .jar-outer {
-  fill: rgba(255, 255, 255, 0.22);
+  fill: rgba(255, 255, 255, 0.20);
   stroke: #4a2914;
-  stroke-width: 4.5;
+  stroke-width: 4.4;
 }
 
 .jar-inner-line {
   fill: none;
-  stroke: rgba(255, 255, 255, 0.68);
-  stroke-width: 2.2;
+  stroke: rgba(255, 255, 255, 0.74);
+  stroke-width: 1.9;
   stroke-linecap: round;
 }
 
 .starter-shape {
   fill: url("#starterFill");
+}
+
+.starter-glow {
+  fill: url("#starterGlow");
+  opacity: 0.64;
 }
 
 .starter-foam {
@@ -141,54 +153,61 @@
   opacity: 0.95;
 }
 
-.jar-shine {
-  fill: none;
-  stroke: rgba(255, 255, 255, 0.78);
-  stroke-width: 4.4;
-  stroke-linecap: round;
-}
-
-.pet-arm,
-.pet-leg {
-  fill: #f7d59b;
-  stroke: #4a2914;
-  stroke-width: 4.3;
-  stroke-linejoin: round;
-}
-
-.pet-arm.left {
-  transform-origin: 43px 141px;
-}
-
-.pet-arm.right {
-  transform-origin: 157px 141px;
-}
-
-.pet-leg.left {
-  transform-origin: 82px 182px;
-}
-
-.pet-leg.right {
-  transform-origin: 118px 182px;
-}
-
+.foam-bubbles circle,
 .pet-bubbles circle {
-  fill: rgba(255, 251, 235, 0.48);
+  fill: rgba(255, 248, 225, 0.82);
   stroke: rgba(220, 171, 90, 0.55);
-  stroke-width: 1.8;
+  stroke-width: 1.4;
   transform-origin: center;
   animation: bubble-wiggle 3.2s ease-in-out infinite;
 }
 
-.pet-bubbles circle:nth-child(2n) {
+.pet-bubbles circle:nth-child(2n),
+.foam-bubbles circle:nth-child(2n) {
   animation-delay: 0.45s;
 }
 
-.pet-bubbles circle:nth-child(3n) {
+.pet-bubbles circle:nth-child(3n),
+.foam-bubbles circle:nth-child(3n) {
   animation-delay: 0.9s;
 }
 
-.eye-white {
+.jar-shine {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.84);
+  stroke-width: 4.8;
+  stroke-linecap: round;
+}
+
+.jar-shine.left-inner {
+  stroke-width: 2.5;
+  opacity: 0.8;
+}
+
+.pet-arm,
+.pet-leg {
+  fill: url("#limbFill");
+  stroke: #4a2914;
+  stroke-width: 4.1;
+}
+
+.pet-arm.left {
+  transform-origin: 30px 136px;
+}
+
+.pet-arm.right {
+  transform-origin: 170px 136px;
+}
+
+.pet-leg.left {
+  transform-origin: 84px 183px;
+}
+
+.pet-leg.right {
+  transform-origin: 116px 183px;
+}
+
+.eye-base {
   fill: #ffffff;
 }
 
@@ -197,11 +216,15 @@
 }
 
 .eye-pupil {
-  fill: #120804;
+  fill: #110804;
+}
+
+.eye-shade {
+  fill: rgba(89, 35, 8, 0.28);
 }
 
 .eye-highlight {
-  fill: rgba(255, 255, 255, 0.96);
+  fill: rgba(255, 255, 255, 0.98);
 }
 
 .jar-eye,
@@ -209,14 +232,14 @@
 .jar-brow {
   fill: none;
   stroke: #2d160a;
-  stroke-width: 4.4;
+  stroke-width: 4.2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
 
 .jar-brow.soft {
-  stroke-width: 3.5;
-  opacity: 0.78;
+  stroke-width: 3.2;
+  opacity: 0.8;
 }
 
 .jar-mouth.happy,
@@ -224,21 +247,27 @@
   fill: #3a180f;
 }
 
+.jar-mouth.hungry,
+.jar-mouth.sleeping {
+  fill: none;
+}
+
 .jar-mouth-tongue {
   fill: none;
   stroke: #ef8167;
-  stroke-width: 4.6;
+  stroke-width: 4.8;
   stroke-linecap: round;
 }
 
 .jar-cheek {
   fill: #f08b75;
-  opacity: 0.62;
-  filter: blur(0.2px);
+  opacity: 0.66;
+  filter: blur(0.3px);
 }
 
-.pet-state-active .eye-group,
-.pet-state-ready .eye-group {
+.pet-state-active .eye-blink,
+.pet-state-ready .eye-blink {
+  transform-box: fill-box;
   transform-origin: center;
   animation: pet-blink 5.2s infinite;
 }
@@ -287,7 +316,7 @@
 
 .pet-state-sleeping .pet-arm.left,
 .pet-state-sleeping .pet-arm.right {
-  opacity: 0.82;
+  opacity: 0.88;
 }
 
 .pet-sparkles path {
@@ -409,13 +438,13 @@
 }
 
 @keyframes bubble-wiggle {
-  0%, 100% { transform: translateY(0) scale(1); opacity: 0.8; }
+  0%, 100% { transform: translateY(0) scale(1); opacity: 0.88; }
   50% { transform: translateY(-4px) scale(1.08); opacity: 1; }
 }
 
 @keyframes pet-blink {
   0%, 92%, 100% { transform: scaleY(1); }
-  95% { transform: scaleY(0.12); }
+  95% { transform: scaleY(0.1); }
 }
 
 @keyframes arm-wave-left {
@@ -497,4 +526,55 @@
 @keyframes sweat-drop {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(3px); }
+}
+
+
+.jar-fill {
+  fill: rgba(255, 255, 255, 0.18);
+}
+
+.jar-outline-main {
+  fill: none;
+  stroke: #4a2914;
+  stroke-width: 4.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.jar-neck-shadow {
+  fill: none;
+  stroke: rgba(96, 63, 34, 0.22);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.jar-outline-layer,
+.pet-lid,
+.pet-arms,
+.pet-legs,
+.glass-details,
+.face-layer,
+.starter-layer,
+.jar-fill-layer {
+  isolation: isolate;
+}
+
+.cloth-top,
+.cloth-skirt,
+.twine-line,
+.bow-loop,
+.bow-tail,
+.bow-knot,
+.jar-outline-main,
+.pet-arm,
+.pet-leg,
+.jar-inner-line,
+.jar-shine,
+.starter-foam,
+.jar-mouth,
+.jar-brow,
+.jar-eye {
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
 }
