@@ -9,6 +9,10 @@
   animation: pet-breathe 2.8s ease-in-out infinite;
 }
 
+#petStage .pet-character {
+  display: none !important;
+}
+
 .custom-pet::before,
 .custom-pet::after {
   content: none !important;
