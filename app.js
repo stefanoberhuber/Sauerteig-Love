@@ -5,11 +5,9 @@ const YT_THUMB = (id) => `https://img.youtube.com/vi/${id}/hqdefault.jpg`;
 const YT_URL = (id) => `https://www.youtube.com/watch?v=${id}`;
 
 const PETS = [
-  { id: "jarling", name: "Glasi", label: "Sauerteigglas" },
-  { id: "blobbi", name: "Blobbi", label: "Teigblob" },
-  { id: "krusti", name: "Krusti", label: "Mini-Brot" },
-  { id: "blubbi", name: "Blubbi", label: "Blubberglas" },
-  { id: "wolki", name: "Wolki", label: "Mehlwolke" },
+  { id: "codex-blue", name: "Mochi", label: "Blauer Softie" },
+  { id: "codex-sprout", name: "Kiki", label: "Sprossenfreund" },
+  { id: "codex-toast", name: "Nori", label: "Krustenkumpel" },
 ];
 
 const STATUS_META = {
@@ -26,15 +24,15 @@ const STATUS_META = {
   hungry: {
     label: "Hungrig",
     color: "#f7b84b",
-    title: "Bald wieder füttern.",
+    title: "Bald wieder fÃ¼ttern.",
   },
   overdue: {
-    label: "Überfällig",
+    label: "ÃœberfÃ¤llig",
     color: "#bc5268",
-    title: "Zeit für eine Fütterung.",
+    title: "Zeit fÃ¼r eine FÃ¼tterung.",
   },
   sleeping: {
-    label: "Schläft",
+    label: "SchlÃ¤ft",
     color: "#9cc9c5",
     title: "Der Starter ruht gerade.",
   },
@@ -44,74 +42,74 @@ const GUIDE_SECTIONS = [
   {
     title: "Was Sauerteig eigentlich ist",
     summary:
-      "Sauerteig ist eine lebendige Kultur aus Mehl, Wasser, wilden Hefen und Milchsäurebakterien. Er lockert Brot, bringt Aroma und macht den Teig bekömmlicher.",
+      "Sauerteig ist eine lebendige Kultur aus Mehl, Wasser, wilden Hefen und MilchsÃ¤urebakterien. Er lockert Brot, bringt Aroma und macht den Teig bekÃ¶mmlicher.",
     points: [
-      "Hefen sorgen für Trieb und Volumen.",
-      "Milchsäurebakterien geben Säure, Aroma und Haltbarkeit.",
+      "Hefen sorgen fÃ¼r Trieb und Volumen.",
+      "MilchsÃ¤urebakterien geben SÃ¤ure, Aroma und Haltbarkeit.",
       "Zeit und Temperatur sind genauso wichtig wie die Zutaten.",
     ],
   },
   {
     title: "Starter neu ansetzen",
     summary:
-      "Für den Start reichen Mehl, Wasser, ein sauberes Glas und Geduld. Vollkorn- oder Roggenmehl bringt oft schneller Aktivität.",
+      "FÃ¼r den Start reichen Mehl, Wasser, ein sauberes Glas und Geduld. Vollkorn- oder Roggenmehl bringt oft schneller AktivitÃ¤t.",
     points: [
       "Tag 1: 50 g Mehl und 50 g Wasser mischen.",
-      "Tag 2 bis 4: Täglich einen Teil behalten und frisch füttern.",
-      "Ab Tag 5: Wenn er zuverlässig aufgeht, auf 12-Stunden-Fütterung wechseln.",
+      "Tag 2 bis 4: TÃ¤glich einen Teil behalten und frisch fÃ¼ttern.",
+      "Ab Tag 5: Wenn er zuverlÃ¤ssig aufgeht, auf 12-Stunden-FÃ¼tterung wechseln.",
     ],
   },
   {
-    title: "Richtig füttern",
+    title: "Richtig fÃ¼ttern",
     summary:
-      "Eine einfache Standardfütterung ist 1 Teil Starter, 1 Teil Wasser, 1 Teil Mehl nach Gewicht. Ein stärkerer Starter darf auch höher gefüttert werden.",
+      "Eine einfache StandardfÃ¼tterung ist 1 Teil Starter, 1 Teil Wasser, 1 Teil Mehl nach Gewicht. Ein stÃ¤rkerer Starter darf auch hÃ¶her gefÃ¼ttert werden.",
     points: [
       "Sauberes Glas nutzen und den Rand abwischen.",
       "Mit einem Gummiband den Anfangsstand markieren.",
-      "Bei Raumtemperatur reift der Starter deutlich schneller als im Kühlschrank.",
+      "Bei Raumtemperatur reift der Starter deutlich schneller als im KÃ¼hlschrank.",
     ],
   },
   {
     title: "Reife erkennen",
     summary:
-      "Ein reifer Starter ist sichtbar aufgegangen, voller Bläschen und riecht angenehm säuerlich bis fruchtig.",
+      "Ein reifer Starter ist sichtbar aufgegangen, voller BlÃ¤schen und riecht angenehm sÃ¤uerlich bis fruchtig.",
     points: [
       "Verdoppelt er sich in 6 bis 8 Stunden, ist er backstark.",
       "Sinkt er wieder ein, war er schon am Peak und wird hungrig.",
-      "Ein leichter Alkoholgeruch heißt meistens: füttern, nicht panisch werden.",
+      "Ein leichter Alkoholgeruch heiÃŸt meistens: fÃ¼ttern, nicht panisch werden.",
     ],
   },
   {
-    title: "Kühlschrankpflege",
+    title: "KÃ¼hlschrankpflege",
     summary:
-      "Wenn ihr nicht täglich backt, darf der Starter im Kühlschrank schlafen. Dann reicht meist eine Fütterung pro Woche.",
+      "Wenn ihr nicht tÃ¤glich backt, darf der Starter im KÃ¼hlschrank schlafen. Dann reicht meist eine FÃ¼tterung pro Woche.",
     points: [
-      "Nach dem Füttern 1 bis 2 Stunden anspringen lassen.",
-      "Dann abgedeckt in den Kühlschrank stellen.",
+      "Nach dem FÃ¼ttern 1 bis 2 Stunden anspringen lassen.",
+      "Dann abgedeckt in den KÃ¼hlschrank stellen.",
       "Vor dem Backen ein- bis zweimal bei Raumtemperatur auffrischen.",
     ],
   },
   {
-    title: "Typische Anfängerfehler",
+    title: "Typische AnfÃ¤ngerfehler",
     summary:
       "Die meisten Probleme entstehen durch zu wenig Zeit, ungenaue Mengen oder einen Starter, der noch nicht stark genug ist.",
     points: [
       "Gehzeiten sind Richtwerte, keine Stoppuhr-Gesetze.",
-      "Teigtemperatur entscheidet über Tempo.",
-      "Ein flacher Laib ist oft Untergare, Übergare oder fehlende Spannung.",
+      "Teigtemperatur entscheidet Ã¼ber Tempo.",
+      "Ein flacher Laib ist oft Untergare, Ãœbergare oder fehlende Spannung.",
     ],
   },
 ];
 
 const GLOSSARY = [
-  ["Anstellgut", "Der kleine Teil eures Starters, den ihr aufbewahrt und weiterfüttert."],
-  ["Levain", "Ein Vorteig aus Anstellgut, Mehl und Wasser, der gezielt fürs Rezept angesetzt wird."],
+  ["Anstellgut", "Der kleine Teil eures Starters, den ihr aufbewahrt und weiterfÃ¼ttert."],
+  ["Levain", "Ein Vorteig aus Anstellgut, Mehl und Wasser, der gezielt fÃ¼rs Rezept angesetzt wird."],
   ["Autolyse", "Mehl und Wasser ruhen, bevor Salz und Starter dazukommen. Das macht den Teig geschmeidiger."],
   ["Stockgare", "Die erste lange Teigruhe nach dem Mischen."],
-  ["Stückgare", "Die letzte Gare nach dem Formen."],
+  ["StÃ¼ckgare", "Die letzte Gare nach dem Formen."],
   ["Dehnen & Falten", "Schonende Methode, um Glutenstruktur und Spannung aufzubauen."],
-  ["Hooch", "Dunkle Flüssigkeit auf hungrigem Starter. Meist ein Zeichen, dass Futter fehlt."],
-  ["Peak", "Der höchste Stand nach dem Füttern. Oft der beste Moment zum Backen."],
+  ["Hooch", "Dunkle FlÃ¼ssigkeit auf hungrigem Starter. Meist ein Zeichen, dass Futter fehlt."],
+  ["Peak", "Der hÃ¶chste Stand nach dem FÃ¼ttern. Oft der beste Moment zum Backen."],
 ];
 
 const VIDEOS = [
@@ -129,7 +127,7 @@ const VIDEOS = [
     language: "Englisch",
     image: YT_THUMB("VEtU4Co08yY"),
     url: YT_URL("VEtU4Co08yY"),
-    description: "Guter Einstieg, wenn man sehen möchte, wie ein Anfängerbrot praktisch abläuft.",
+    description: "Guter Einstieg, wenn man sehen mÃ¶chte, wie ein AnfÃ¤ngerbrot praktisch ablÃ¤uft.",
   },
   {
     title: "The Easiest Way to Make a Sourdough Starter",
@@ -145,32 +143,32 @@ const VIDEOS = [
     language: "Englisch",
     image: IMAGE(6654104),
     url: "https://www.kingarthurbaking.com/videos/baking-skills/how-to-feed-sourdough-starter",
-    description: "Kurze Technik-Erklärung zum Füttern eines Starters.",
+    description: "Kurze Technik-ErklÃ¤rung zum FÃ¼ttern eines Starters.",
   },
   {
-    title: "Sauerteig Schritt für Schritt selber machen",
+    title: "Sauerteig Schritt fÃ¼r Schritt selber machen",
     source: "Thomas kocht",
     language: "Deutsch",
     image: IMAGE(31428934),
     url: "https://www.privatkoch-hamburg.de/sauerteig-selber-machen/",
-    description: "Deutschsprachige Anleitung für Roggen- und Weizensauerteig.",
+    description: "Deutschsprachige Anleitung fÃ¼r Roggen- und Weizensauerteig.",
   },
 ];
 
 const SCHEDULES = {
   overnight: {
-    label: "Klassisch über Nacht",
+    label: "Klassisch Ã¼ber Nacht",
     totalHours: 34,
     steps: [
-      ["Starter auffrischen", 0, 15, "Anstellgut mit Mehl und Wasser füttern, damit es backstark wird."],
-      ["Levain ansetzen", 10, 15, "Ein Teil des aktiven Starters wird zum Vorteig für das Rezept."],
-      ["Teig mischen", 16, 20, "Mehl, Wasser, Levain und später Salz zusammenführen."],
-      ["Dehnen & Falten 1", 17, 10, "Teig vorsichtig dehnen und über sich selbst falten."],
-      ["Dehnen & Falten 2", 17.5, 10, "Zweite Runde für mehr Struktur."],
-      ["Stockgare prüfen", 21, 10, "Der Teig sollte luftiger wirken und sichtbar Volumen haben."],
-      ["Formen", 22, 20, "Teigling straff formen und ins Gärkörbchen legen."],
-      ["Kühlschrankgare", 22.5, 10, "Abgedeckt kalt stellen. Die lange Gare bringt Aroma."],
-      ["Ofen vorheizen", 33, 30, "Topf, Stein oder Stahl kräftig vorheizen."],
+      ["Starter auffrischen", 0, 15, "Anstellgut mit Mehl und Wasser fÃ¼ttern, damit es backstark wird."],
+      ["Levain ansetzen", 10, 15, "Ein Teil des aktiven Starters wird zum Vorteig fÃ¼r das Rezept."],
+      ["Teig mischen", 16, 20, "Mehl, Wasser, Levain und spÃ¤ter Salz zusammenfÃ¼hren."],
+      ["Dehnen & Falten 1", 17, 10, "Teig vorsichtig dehnen und Ã¼ber sich selbst falten."],
+      ["Dehnen & Falten 2", 17.5, 10, "Zweite Runde fÃ¼r mehr Struktur."],
+      ["Stockgare prÃ¼fen", 21, 10, "Der Teig sollte luftiger wirken und sichtbar Volumen haben."],
+      ["Formen", 22, 20, "Teigling straff formen und ins GÃ¤rkÃ¶rbchen legen."],
+      ["KÃ¼hlschrankgare", 22.5, 10, "Abgedeckt kalt stellen. Die lange Gare bringt Aroma."],
+      ["Ofen vorheizen", 33, 30, "Topf, Stein oder Stahl krÃ¤ftig vorheizen."],
       ["Backen", 33.5, 45, "Mit Dampf oder im Topf backen, dann ausdampfen lassen."],
     ],
   },
@@ -178,42 +176,42 @@ const SCHEDULES = {
     label: "Gleicher Tag",
     totalHours: 14,
     steps: [
-      ["Starter auffrischen", 0, 15, "Morgens füttern und warm stellen."],
+      ["Starter auffrischen", 0, 15, "Morgens fÃ¼ttern und warm stellen."],
       ["Teig mischen", 5, 20, "Starter auf Peak nutzen und Hauptteig mischen."],
       ["Dehnen & Falten 1", 5.75, 10, "Erste Struktur-Runde."],
       ["Dehnen & Falten 2", 6.25, 10, "Zweite Struktur-Runde."],
       ["Stockgare", 6.5, 240, "Teig warm reifen lassen und Volumen beobachten."],
-      ["Formen", 10.75, 20, "Rund oder länglich formen."],
-      ["Stückgare", 11.5, 90, "Bis der Teig federnd reagiert."],
+      ["Formen", 10.75, 20, "Rund oder lÃ¤nglich formen."],
+      ["StÃ¼ckgare", 11.5, 90, "Bis der Teig federnd reagiert."],
       ["Ofen vorheizen", 12.75, 30, "Topf oder Blech vorheizen."],
-      ["Backen", 13.25, 45, "Kräftig backen, danach auskühlen lassen."],
+      ["Backen", 13.25, 45, "KrÃ¤ftig backen, danach auskÃ¼hlen lassen."],
     ],
   },
   rye: {
-    label: "Roggen ruhig geführt",
+    label: "Roggen ruhig gefÃ¼hrt",
     totalHours: 22,
     steps: [
       ["Sauerteig ansetzen", 0, 15, "Roggenanstellgut mit Roggenmehl und Wasser mischen."],
-      ["Quellstück vorbereiten", 0.25, 15, "Saaten oder Schrot mit Wasser quellen lassen."],
-      ["Hauptteig mischen", 14, 20, "Roggenteig nur gründlich mischen, nicht stark kneten."],
+      ["QuellstÃ¼ck vorbereiten", 0.25, 15, "Saaten oder Schrot mit Wasser quellen lassen."],
+      ["Hauptteig mischen", 14, 20, "Roggenteig nur grÃ¼ndlich mischen, nicht stark kneten."],
       ["Teigruhe", 14.5, 60, "Abgedeckt ruhen lassen."],
-      ["In die Form geben", 15.5, 15, "Oberfläche glatt streichen und bemehlen."],
-      ["Stückgare", 15.75, 180, "Warten, bis kleine Risse sichtbar werden."],
-      ["Ofen vorheizen", 20.25, 30, "Heiß starten, später Temperatur reduzieren."],
-      ["Backen", 20.75, 75, "Länger ausbacken und vollständig auskühlen lassen."],
+      ["In die Form geben", 15.5, 15, "OberflÃ¤che glatt streichen und bemehlen."],
+      ["StÃ¼ckgare", 15.75, 180, "Warten, bis kleine Risse sichtbar werden."],
+      ["Ofen vorheizen", 20.25, 30, "HeiÃŸ starten, spÃ¤ter Temperatur reduzieren."],
+      ["Backen", 20.75, 75, "LÃ¤nger ausbacken und vollstÃ¤ndig auskÃ¼hlen lassen."],
     ],
   },
   pizza: {
     label: "Pizza mit langer Gare",
     totalHours: 28,
     steps: [
-      ["Starter auffrischen", 0, 15, "Starter für den Teig aktivieren."],
-      ["Pizzateig mischen", 8, 20, "Mehl, Wasser, Starter, Salz und Öl mischen."],
+      ["Starter auffrischen", 0, 15, "Starter fÃ¼r den Teig aktivieren."],
+      ["Pizzateig mischen", 8, 20, "Mehl, Wasser, Starter, Salz und Ã–l mischen."],
       ["Dehnen & Falten", 9, 10, "Eine Runde reicht meistens."],
-      ["Kühlschrankgare", 10, 10, "Teig abgedeckt kalt reifen lassen."],
+      ["KÃ¼hlschrankgare", 10, 10, "Teig abgedeckt kalt reifen lassen."],
       ["Teig akklimatisieren", 25, 60, "Vor dem Backen auf Raumtemperatur kommen lassen."],
-      ["Ofen sehr heiß vorheizen", 26.5, 45, "Stein oder Stahl maximal heiß vorheizen."],
-      ["Pizza backen", 27.5, 12, "Kurz und heiß backen."],
+      ["Ofen sehr heiÃŸ vorheizen", 26.5, 45, "Stein oder Stahl maximal heiÃŸ vorheizen."],
+      ["Pizza backen", 27.5, 12, "Kurz und heiÃŸ backen."],
     ],
   },
   focaccia: {
@@ -222,10 +220,10 @@ const SCHEDULES = {
     steps: [
       ["Starter auffrischen", 0, 15, "Starter aktivieren."],
       ["Teig mischen", 8, 20, "Weichen Teig mischen und abdecken."],
-      ["Falten", 9, 10, "Mit nassen Händen falten."],
-      ["Kühlschrankgare", 10, 10, "Langsam Aroma entwickeln lassen."],
-      ["In die Form geben", 21, 15, "Mit Olivenöl in die Form legen."],
-      ["Dellen und belegen", 23, 15, "Mit Fingern eindrücken und belegen."],
+      ["Falten", 9, 10, "Mit nassen HÃ¤nden falten."],
+      ["KÃ¼hlschrankgare", 10, 10, "Langsam Aroma entwickeln lassen."],
+      ["In die Form geben", 21, 15, "Mit OlivenÃ¶l in die Form legen."],
+      ["Dellen und belegen", 23, 15, "Mit Fingern eindrÃ¼cken und belegen."],
       ["Backen", 23.5, 25, "Goldbraun backen."],
     ],
   },
@@ -233,10 +231,10 @@ const SCHEDULES = {
     label: "Reststarter schnell",
     totalHours: 3,
     steps: [
-      ["Teig anrühren", 0, 15, "Reststarter mit den übrigen Zutaten mischen."],
+      ["Teig anrÃ¼hren", 0, 15, "Reststarter mit den Ã¼brigen Zutaten mischen."],
       ["Ruhen lassen", 0.5, 45, "Kurz entspannen lassen."],
       ["Formen oder portionieren", 1.5, 15, "In Pfanne, Ofen oder Blech vorbereiten."],
-      ["Backen oder ausbacken", 2, 40, "Fertig backen und warm genießen."],
+      ["Backen oder ausbacken", 2, 40, "Fertig backen und warm genieÃŸen."],
     ],
   },
 };
@@ -258,9 +256,9 @@ const RECIPES = [
       "Mehl und 320 g Wasser mischen und 45 Minuten ruhen lassen.",
       "Starter, Salz und restliches Wasser einarbeiten.",
       "3 Runden dehnen und falten, dann bis zu 50 Prozent Volumenzuwachs gehen lassen.",
-      "Formen, über Nacht kalt stellen und heiß im Topf backen.",
+      "Formen, Ã¼ber Nacht kalt stellen und heiÃŸ im Topf backen.",
     ],
-    tip: "Für den ersten Versuch lieber etwas weniger Wasser nehmen. Ein handhabbarer Teig ist mehr wert als eine hohe Hydration.",
+    tip: "FÃ¼r den ersten Versuch lieber etwas weniger Wasser nehmen. Ein handhabbarer Teig ist mehr wert als eine hohe Hydration.",
   },
   {
     id: "bauernbrot",
@@ -272,15 +270,15 @@ const RECIPES = [
     image: IMAGE(36202913),
     credit: "Pexels / Ece Ebrar Toycu",
     profile: "overnight",
-    summary: "Herzhaftes Mischbrot mit kräftiger Kruste und alltagstauglicher Führung.",
-    ingredients: ["320 g Weizenmehl", "180 g Roggenmehl", "360 g Wasser", "120 g Starter", "11 g Salz", "1 TL Brotgewürz"],
+    summary: "Herzhaftes Mischbrot mit krÃ¤ftiger Kruste und alltagstauglicher FÃ¼hrung.",
+    ingredients: ["320 g Weizenmehl", "180 g Roggenmehl", "360 g Wasser", "120 g Starter", "11 g Salz", "1 TL BrotgewÃ¼rz"],
     steps: [
       "Mehle, Wasser und Starter mischen.",
-      "Nach 30 Minuten Salz und Gewürz einarbeiten.",
-      "Während der Stockgare zweimal falten.",
-      "Rund formen, kalt führen und kräftig ausbacken.",
+      "Nach 30 Minuten Salz und GewÃ¼rz einarbeiten.",
+      "WÃ¤hrend der Stockgare zweimal falten.",
+      "Rund formen, kalt fÃ¼hren und krÃ¤ftig ausbacken.",
     ],
-    tip: "Roggen macht den Teig klebriger. Mit nassen Händen arbeiten statt immer mehr Mehl zuzugeben.",
+    tip: "Roggen macht den Teig klebriger. Mit nassen HÃ¤nden arbeiten statt immer mehr Mehl zuzugeben.",
   },
   {
     id: "roggenmischbrot",
@@ -292,15 +290,15 @@ const RECIPES = [
     image: IMAGE(31428934),
     credit: "Pexels / Frank Schrader",
     profile: "rye",
-    summary: "Ein saftiges Brot mit Roggenaroma, gut für Käse, Aufstriche und Jausen.",
+    summary: "Ein saftiges Brot mit Roggenaroma, gut fÃ¼r KÃ¤se, Aufstriche und Jausen.",
     ingredients: ["280 g Roggenmehl", "220 g Weizenmehl", "380 g Wasser", "150 g Roggensauer", "12 g Salz"],
     steps: [
-      "Roggensauer über Nacht reifen lassen.",
-      "Alle Zutaten gründlich mischen.",
+      "Roggensauer Ã¼ber Nacht reifen lassen.",
+      "Alle Zutaten grÃ¼ndlich mischen.",
       "Teigruhe geben und in eine bemehlte Form setzen.",
-      "Nach sichtbaren Rissen heiß anbacken und lange ausbacken.",
+      "Nach sichtbaren Rissen heiÃŸ anbacken und lange ausbacken.",
     ],
-    tip: "Roggenbrote brauchen nach dem Backen Ruhe. Am besten erst am nächsten Tag anschneiden.",
+    tip: "Roggenbrote brauchen nach dem Backen Ruhe. Am besten erst am nÃ¤chsten Tag anschneiden.",
   },
   {
     id: "reines-roggenbrot",
@@ -318,7 +316,7 @@ const RECIPES = [
       "Sauerteig reif werden lassen.",
       "Zutaten zu einem klebrigen Teig mischen.",
       "In eine Form streichen und glattziehen.",
-      "Bis zu kleinen Oberflächenrissen gehen lassen und ausbacken.",
+      "Bis zu kleinen OberflÃ¤chenrissen gehen lassen und ausbacken.",
     ],
     tip: "Nicht wie Weizenteig behandeln. Roggen will gemischt, nicht elastisch geknetet werden.",
   },
@@ -330,17 +328,17 @@ const RECIPES = [
     time: "ca. 14 Std.",
     active: "45 Min.",
     image: IMAGE(10075983),
-    credit: "Pexels / Noemí Jiménez",
+    credit: "Pexels / NoemÃ­ JimÃ©nez",
     profile: "sameDay",
-    summary: "Mild und nussig. Dinkel ist zart und wird mit vorsichtiger Bearbeitung besonders schön.",
+    summary: "Mild und nussig. Dinkel ist zart und wird mit vorsichtiger Bearbeitung besonders schÃ¶n.",
     ingredients: ["500 g Dinkelmehl 630", "330 g Wasser", "90 g Starter", "10 g Salz", "15 g Honig"],
     steps: [
       "Teig nur kurz mischen und ruhen lassen.",
       "Zwei sanfte Falt-Runden geben.",
-      "Nicht überkneten, Dinkel wird sonst schnell weich.",
+      "Nicht Ã¼berkneten, Dinkel wird sonst schnell weich.",
       "Formen und goldbraun backen.",
     ],
-    tip: "Ein kleines Brühstück aus Dinkelmehl und Wasser macht das Brot saftiger.",
+    tip: "Ein kleines BrÃ¼hstÃ¼ck aus Dinkelmehl und Wasser macht das Brot saftiger.",
   },
   {
     id: "vollkornbrot",
@@ -352,15 +350,15 @@ const RECIPES = [
     image: IMAGE(36930991),
     credit: "Pexels / Kerim Eveyik",
     profile: "overnight",
-    summary: "Kräftiger Geschmack, mehr Wasserbindung und ein sehr sättigendes Brot.",
+    summary: "KrÃ¤ftiger Geschmack, mehr Wasserbindung und ein sehr sÃ¤ttigendes Brot.",
     ingredients: ["400 g Weizenvollkorn", "100 g Roggenvollkorn", "410 g Wasser", "120 g Starter", "12 g Salz"],
     steps: [
-      "Vollkornmehl mit Wasser länger quellen lassen.",
+      "Vollkornmehl mit Wasser lÃ¤nger quellen lassen.",
       "Starter und Salz einarbeiten.",
-      "Während der Stockgare falten und Volumen beobachten.",
-      "Kalt gehen lassen und gründlich backen.",
+      "WÃ¤hrend der Stockgare falten und Volumen beobachten.",
+      "Kalt gehen lassen und grÃ¼ndlich backen.",
     ],
-    tip: "Vollkorn braucht mehr Wasser und mehr Quellzeit. Nicht zu früh nachschütten, erst ruhen lassen.",
+    tip: "Vollkorn braucht mehr Wasser und mehr Quellzeit. Nicht zu frÃ¼h nachschÃ¼tten, erst ruhen lassen.",
   },
   {
     id: "landbrot",
@@ -378,7 +376,7 @@ const RECIPES = [
       "Teig mischen und 30 Minuten ruhen lassen.",
       "Drei Falt-Runden einplanen.",
       "Bei 40 bis 60 Prozent Volumenzuwachs formen.",
-      "Über Nacht kalt stellen und heiß backen.",
+      "Ãœber Nacht kalt stellen und heiÃŸ backen.",
     ],
     tip: "Das Brot eignet sich gut zum Lernen, weil es kleine Fehler recht freundlich verzeiht.",
   },
@@ -396,11 +394,11 @@ const RECIPES = [
     ingredients: ["500 g Weizenmehl", "370 g Wasser", "100 g Starter", "10 g Salz"],
     steps: [
       "Weichen Teig mischen und schonend falten.",
-      "Lange Stockgare mit guter Beobachtung führen.",
+      "Lange Stockgare mit guter Beobachtung fÃ¼hren.",
       "Vorsichtig vorformen und entspannen lassen.",
       "Zu Baguettes rollen, einschneiden und mit Dampf backen.",
     ],
-    tip: "Beim Formen weniger drücken. Die Luft im Teig ist eure Freundin.",
+    tip: "Beim Formen weniger drÃ¼cken. Die Luft im Teig ist eure Freundin.",
   },
   {
     id: "ciabatta",
@@ -412,19 +410,19 @@ const RECIPES = [
     image: IMAGE(31546232),
     credit: "Pexels",
     profile: "overnight",
-    summary: "Sehr weicher Teig, große Poren und viel Aroma.",
-    ingredients: ["500 g Weizenmehl", "400 g Wasser", "100 g Starter", "11 g Salz", "20 g Olivenöl"],
+    summary: "Sehr weicher Teig, groÃŸe Poren und viel Aroma.",
+    ingredients: ["500 g Weizenmehl", "400 g Wasser", "100 g Starter", "11 g Salz", "20 g OlivenÃ¶l"],
     steps: [
       "Teig mit hoher Hydration mischen.",
       "Mehrere Coil-Folds oder sanfte Faltungen geben.",
       "Reifen lassen, bis der Teig luftig und wackelig ist.",
-      "Abstechen statt stark formen und heiß backen.",
+      "Abstechen statt stark formen und heiÃŸ backen.",
     ],
-    tip: "Sehr nasse Hände und eine Teigkarte machen Ciabatta deutlich entspannter.",
+    tip: "Sehr nasse HÃ¤nde und eine Teigkarte machen Ciabatta deutlich entspannter.",
   },
   {
     id: "kastenbrot",
-    title: "Kastenbrot für den Alltag",
+    title: "Kastenbrot fÃ¼r den Alltag",
     category: "klassiker",
     difficulty: "Einfach",
     time: "ca. 14 Std.",
@@ -432,15 +430,15 @@ const RECIPES = [
     image: IMAGE(6654104),
     credit: "Pexels / Arina Krasnikova",
     profile: "sameDay",
-    summary: "Ein unkompliziertes Brot aus der Form. Ideal für Toast, Frühstück und Sandwiches.",
-    ingredients: ["450 g Weizen- oder Dinkelmehl", "320 g Wasser", "100 g Starter", "10 g Salz", "15 g Öl"],
+    summary: "Ein unkompliziertes Brot aus der Form. Ideal fÃ¼r Toast, FrÃ¼hstÃ¼ck und Sandwiches.",
+    ingredients: ["450 g Weizen- oder Dinkelmehl", "320 g Wasser", "100 g Starter", "10 g Salz", "15 g Ã–l"],
     steps: [
       "Alle Zutaten mischen und kurz ruhen lassen.",
       "Ein bis zwei Faltungen geben.",
       "In die gefettete Form legen und bis knapp unter den Rand gehen lassen.",
       "Backen, aus der Form nehmen und kurz nachbacken.",
     ],
-    tip: "Die Form nimmt Druck raus. Perfekt, wenn ihr erst ein Gefühl für Gare entwickeln wollt.",
+    tip: "Die Form nimmt Druck raus. Perfekt, wenn ihr erst ein GefÃ¼hl fÃ¼r Gare entwickeln wollt.",
   },
   {
     id: "focaccia",
@@ -450,15 +448,15 @@ const RECIPES = [
     time: "ca. 24 Std.",
     active: "40 Min.",
     image: IMAGE(13673954),
-    credit: "Pexels / Büşra Yaman",
+    credit: "Pexels / BÃ¼ÅŸra Yaman",
     profile: "focaccia",
-    summary: "Weich, ölig, aromatisch und sehr dankbar für Anfänger.",
-    ingredients: ["500 g Weizenmehl", "410 g Wasser", "100 g Starter", "11 g Salz", "35 g Olivenöl", "Rosmarin"],
+    summary: "Weich, Ã¶lig, aromatisch und sehr dankbar fÃ¼r AnfÃ¤nger.",
+    ingredients: ["500 g Weizenmehl", "410 g Wasser", "100 g Starter", "11 g Salz", "35 g OlivenÃ¶l", "Rosmarin"],
     steps: [
-      "Weichen Teig mischen und mit Olivenöl abdecken.",
+      "Weichen Teig mischen und mit OlivenÃ¶l abdecken.",
       "Ein bis zwei Faltungen geben.",
       "Lang kalt reifen lassen.",
-      "In der Form eindrücken, belegen und goldbraun backen.",
+      "In der Form eindrÃ¼cken, belegen und goldbraun backen.",
     ],
     tip: "Focaccia darf wild und lebendig aussehen. Das macht sie charmant.",
   },
@@ -473,14 +471,14 @@ const RECIPES = [
     credit: "Pexels / Anna Shvets",
     profile: "pizza",
     summary: "Knuspriger Rand, lange Gare und viel Aroma.",
-    ingredients: ["500 g Pizzamehl", "330 g Wasser", "90 g Starter", "12 g Salz", "15 g Olivenöl"],
+    ingredients: ["500 g Pizzamehl", "330 g Wasser", "90 g Starter", "12 g Salz", "15 g OlivenÃ¶l"],
     steps: [
       "Teig mischen und kurz ruhen lassen.",
       "Einmal falten und kalt reifen lassen.",
       "Vor dem Backen Raumtemperatur annehmen lassen.",
-      "Sehr heiß und kurz backen.",
+      "Sehr heiÃŸ und kurz backen.",
     ],
-    tip: "Je heißer der Ofen, desto besser der Rand. Backstahl oder Stein hilft sehr.",
+    tip: "Je heiÃŸer der Ofen, desto besser der Rand. Backstahl oder Stein hilft sehr.",
   },
   {
     id: "pancakes",
@@ -492,72 +490,97 @@ const RECIPES = [
     image: IMAGE(6632444),
     credit: "Pexels / Alesia Kozik",
     profile: "discard",
-    summary: "Eine süße Reststarter-Idee für Frühstück und Sonntage.",
+    summary: "Eine sÃ¼ÃŸe Reststarter-Idee fÃ¼r FrÃ¼hstÃ¼ck und Sonntage.",
     ingredients: ["150 g Reststarter", "120 g Mehl", "160 g Milch", "1 Ei", "20 g Zucker", "1 TL Backpulver", "Prise Salz"],
     steps: [
-      "Alle Zutaten zu einem dickflüssigen Teig verrühren.",
-      "Kurz ruhen lassen.",
-      "In einer Pfanne langsam goldbraun ausbacken.",
-      "Mit Joghurt, Obst oder Ahornsirup servieren.",
+      "Alle Zutaten zu einem dicken Teig verrÃ¼hren.",
+      "10 Minuten ruhen lassen.",
+      "Kleine Pancakes in wenig Butter ausbacken.",
+      "Warm mit Ahornsirup oder Obst servieren.",
     ],
-    tip: "Reststarter bringt Aroma, Backpulver sorgt hier für die schnelle Lockerung.",
+    tip: "Auch super mit Banane im Teig oder Blaubeeren direkt in der Pfanne.",
   },
   {
-    id: "cracker",
-    title: "Sauerteig-Cracker",
+    id: "waffeln",
+    title: "Waffeln mit Reststarter",
     category: "alternative",
     difficulty: "Einfach",
     time: "ca. 3 Std.",
-    active: "30 Min.",
-    image: IMAGE(10075983),
-    credit: "Pexels / Noemí Jiménez",
+    active: "20 Min.",
+    image: IMAGE(3776947),
+    credit: "Pexels / Daria Shevtsova",
     profile: "discard",
-    summary: "Knusprige Resteverwertung mit Salz, Öl und Saaten.",
-    ingredients: ["200 g Reststarter", "80 g Mehl", "30 g Olivenöl", "5 g Salz", "Saaten oder Kräuter"],
+    summary: "AuÃŸen goldig, innen weich, mit leichter Sauerteignote.",
+    ingredients: ["150 g Reststarter", "140 g Mehl", "180 g Milch", "2 Eier", "40 g Butter", "25 g Zucker"],
     steps: [
-      "Alle Zutaten mischen.",
-      "Dünn auf Backpapier streichen.",
-      "Vorbacken, schneiden und knusprig fertigbacken.",
-      "Gut auskühlen lassen.",
+      "Zutaten glattrÃ¼hren.",
+      "Waffeleisen gut vorheizen.",
+      "Portionen goldbraun backen.",
+      "Mit Puderzucker oder Kompott servieren.",
     ],
-    tip: "Je dünner gestrichen, desto knuspriger. Lieber zwei Bleche nutzen.",
+    tip: "Der Reststarter darf direkt aus dem KÃ¼hlschrank kommen.",
+  },
+  {
+    id: "cracker",
+    title: "Reststarter-Cracker",
+    category: "alternative",
+    difficulty: "Einfach",
+    time: "ca. 3 Std.",
+    active: "20 Min.",
+    image: IMAGE(1872904),
+    credit: "Pexels / Mariana Kurnyk",
+    profile: "discard",
+    summary: "Knusprige kleine Cracker fÃ¼r Dips, Jause und KÃ¤seplatte.",
+    ingredients: ["180 g Reststarter", "60 g Mehl", "35 g OlivenÃ¶l", "1 TL Salz", "Saaten oder KrÃ¤uter"],
+    steps: [
+      "Alles zu einem streichfÃ¤higen Teig verrÃ¼hren.",
+      "DÃ¼nn auf Backpapier verstreichen.",
+      "Mit Saaten bestreuen, vorschneiden und knusprig backen.",
+      "Komplett auskÃ¼hlen lassen.",
+    ],
+    tip: "Je dÃ¼nner der Teig verteilt ist, desto knuspriger wird das Ergebnis.",
   },
   {
     id: "fladenbrot",
-    title: "Fladenbrot mit Sauerteig",
+    title: "Pfannen-Fladenbrot mit Reststarter",
     category: "alternative",
     difficulty: "Einfach",
-    time: "ca. 14 Std.",
-    active: "40 Min.",
-    image: IMAGE(20281829),
-    credit: "Pexels / Aida Shukuhi",
-    profile: "sameDay",
-    summary: "Weiches Brot aus Pfanne oder heißem Ofen, ideal zu Dips und Suppe.",
-    ingredients: ["400 g Weizenmehl", "260 g Wasser", "90 g Starter", "8 g Salz", "20 g Joghurt", "15 g Öl"],
+    time: "ca. 3 Std.",
+    active: "25 Min.",
+    image: IMAGE(2367817),
+    credit: "Pexels / Eneida Nieves",
+    profile: "discard",
+    summary: "Schnelles Fladenbrot fÃ¼r Suppen, Dips oder als Beilage zum Abendessen.",
+    ingredients: ["160 g Reststarter", "180 g Mehl", "100 g Joghurt", "1 TL Salz", "1 EL Ã–l"],
     steps: [
-      "Teig mischen und ruhen lassen.",
-      "In Portionen teilen und flach ziehen.",
-      "Kurz heiß backen oder in der Pfanne ausbacken.",
-      "Noch warm mit etwas Öl bestreichen.",
+      "Zu einem weichen Teig mischen und kurz ruhen lassen.",
+      "In Portionen teilen und flach ausrollen.",
+      "In heiÃŸer Pfanne mit wenig Ã–l ausbacken.",
+      "Warm stapeln und weich halten.",
     ],
-    tip: "Perfekt, wenn ihr Brot wollt, aber keinen perfekten Laib formen möchtet.",
+    tip: "Mit Knoblauchbutter und KrÃ¤utern werden sie besonders gut.",
   },
 ];
 
 const CARE_TIMELINE = [
-  ["Tag 1", "50 g Roggen- oder Vollkornmehl mit 50 g Wasser mischen. Locker abdecken und warm stellen."],
-  ["Tag 2", "Gut umrühren. Wenn schon Aktivität sichtbar ist, 50 g behalten und mit 50 g Wasser plus 50 g Mehl füttern."],
-  ["Tag 3-4", "Täglich füttern. Geruch und Blasen können schwanken, das ist normal."],
-  ["Tag 5-7", "Wenn der Starter deutlich steigt, auf 12-Stunden-Fütterung wechseln und Peak beobachten."],
-  ["Bereit", "Wenn er sich nach dem Füttern in 6 bis 8 Stunden verdoppelt, kann er Brot treiben."],
-  ["Pflege", "Im Kühlschrank reicht meist eine wöchentliche Fütterung. Vor dem Backen wieder aktivieren."],
+  ["Tag 1", "50 g Mehl und 50 g Wasser mischen, locker abdecken und warm stehen lassen."],
+  ["Tag 2", "Etwa die HÃ¤lfte verwerfen und wieder mit Mehl und Wasser fÃ¼ttern."],
+  ["Tag 3", "BlÃ¤schen beobachten, Geruch prÃ¼fen, bei Bedarf zweimal fÃ¼ttern."],
+  ["Tag 4", "Jetzt sollte mehr Leben sichtbar sein. Rhythmus beibehalten."],
+  ["Tag 5", "Wenn der Starter deutlich aufgeht, auf krÃ¤ftigere FÃ¼tterungen wechseln."],
+  ["Danach", "Einen klaren Pflege-Rhythmus wÃ¤hlen: Raumtemperatur oder KÃ¼hlschrank."],
 ];
+
+const STORE_KEY = "sauerteig-love-state-v1";
+let deferredInstallPrompt = null;
+let currentPlanEvents = [];
 
 const DEFAULT_STATE = {
   starterName: "Blubber",
-  petId: "jarling",
+  starterNameSaved: false,
+  petId: "codex-blue",
   starterMode: "new",
-  feedInterval: "24",
+  feedInterval: "12",
   customFeedHours: 24,
   lastFed: new Date().toISOString(),
   favorites: [],
@@ -565,20 +588,19 @@ const DEFAULT_STATE = {
   lastPlan: null,
 };
 
-const STORE_KEY = "sauerteig-love-state-v1";
-
 const state = loadState();
-let currentPlanEvents = [];
-let deferredInstallPrompt = null;
 
-const $ = (selector) => document.querySelector(selector);
-const $$ = (selector) => Array.from(document.querySelectorAll(selector));
+function $(selector) {
+  return document.querySelector(selector);
+}
+
+function $$(selector) {
+  return Array.from(document.querySelectorAll(selector));
+}
 
 function loadState() {
   try {
-    const raw = localStorage.getItem(STORE_KEY);
-    if (!raw) return { ...DEFAULT_STATE };
-    return { ...DEFAULT_STATE, ...JSON.parse(raw) };
+    return { ...DEFAULT_STATE, ...JSON.parse(localStorage.getItem(STORE_KEY) || "{}") };
   } catch {
     return { ...DEFAULT_STATE };
   }
@@ -666,49 +688,35 @@ function getFeedingInfo() {
 function petMessage(info) {
   const name = state.starterName || "Euer Starter";
   if (info.key === "overdue") {
-    return `${name} ist überfällig und möchte gefüttert werden. Danach wird die nächste Erinnerung neu berechnet.`;
+    return `${name} ist Ã¼berfÃ¤llig und mÃ¶chte gefÃ¼ttert werden. Danach wird die nÃ¤chste Erinnerung neu berechnet.`;
   }
   if (info.key === "hungry") {
     return `${name} wird hungrig. Bereitet Mehl, Wasser und ein sauberes Glas vor.`;
   }
   if (info.key === "ready") {
-    return `${name} ist im starken Fenster: schön blubbrig, aktiv und bereit für ein Rezept.`;
+    return `${name} ist im starken Fenster: schÃ¶n blubbrig, aktiv und bereit fÃ¼r ein Rezept.`;
   }
   if (info.key === "sleeping") {
-    return `${name} ruht im Langzeitmodus. Nicht stören, nur rechtzeitig wieder auffrischen.`;
+    return `${name} ruht im Langzeitmodus. Nicht stÃ¶ren, nur rechtzeitig wieder auffrischen.`;
   }
-  return `${name} arbeitet gerade gemütlich vor sich hin. Behaltet den Stand im Glas im Blick.`;
+  return `${name} arbeitet gerade gemÃ¼tlich vor sich hin. Behaltet den Stand im Glas im Blick.`;
 }
 
 function renderPet() {
   const info = getFeedingInfo();
-  const pet = PETS.find((item) => item.id === state.petId) || PETS[0];
   const status = STATUS_META[info.key];
   const stage = $("#petStage");
-  stage.innerHTML = `
-    <div class="pet-character pet-${pet.id} status-${info.key}" aria-label="${escapeHtml(pet.name)} ist ${escapeHtml(status.label)}">
-      <div class="pet-body">
-        <span class="pet-shine"></span>
-        <span class="bubble one"></span>
-        <span class="bubble two"></span>
-        <span class="bubble three"></span>
-      </div>
-      <span class="eye left"></span>
-      <span class="eye right"></span>
-      <span class="cheek left"></span>
-      <span class="cheek right"></span>
-      <span class="mouth"></span>
-      <span class="pet-label">${escapeHtml(pet.name)}</span>
-    </div>
-  `;
+  stage.innerHTML = "";
 
+  $("#starterNameTitle").textContent = state.starterName || "Blubber";
+  $("#starterEditor").classList.toggle("is-saved", Boolean(state.starterNameSaved));
   $("#statusDot").style.background = status.color;
   $("#petStatusLabel").textContent = status.label;
   $("#petMessage").textContent = petMessage(info);
   $("#nextFeedingText").textContent =
     info.remaining < 0
-      ? `Fütterung verpasst seit ${hoursLabel(Math.abs(info.remaining))}`
-      : `Nächste Fütterung: ${formatDateTime(info.nextFed)} · in ${hoursLabel(info.remaining)}`;
+      ? `FÃ¼tterung verpasst seit ${hoursLabel(Math.abs(info.remaining))}`
+      : `NÃ¤chste FÃ¼tterung: ${formatDateTime(info.nextFed)} Â· in ${hoursLabel(info.remaining)}`;
   $("#careTitle").textContent = status.title;
   $("#careText").textContent = petMessage(info);
   $("#careMeterFill").style.height = `${Math.max(10, Math.round(info.progress * 100))}%`;
@@ -732,7 +740,7 @@ function renderGuides() {
       <a class="video-card" href="${video.url}" target="_blank" rel="noreferrer">
         <div class="video-thumb">
           <img src="${video.image}" alt="${escapeHtml(video.title)}" loading="lazy" />
-          <span class="play-badge">▶</span>
+          <span class="play-badge">â–¶</span>
         </div>
         <div class="video-body">
           <div class="badge-row">
@@ -781,6 +789,14 @@ function renderRecipes() {
         <article class="recipe-card">
           <div class="recipe-image">
             <img src="${recipe.image}" alt="${escapeHtml(recipe.title)}" loading="lazy" />
+            <div class="image-actions" aria-label="Rezeptaktionen">
+              <button class="image-action ${favorite ? "active" : ""}" data-action="favorite" data-id="${recipe.id}" aria-label="Als Herz-Rezept markieren">
+                â™¥
+              </button>
+              <button class="image-action ${later ? "active" : ""}" data-action="later" data-id="${recipe.id}" aria-label="FÃ¼r spÃ¤ter speichern">
+                â—·
+              </button>
+            </div>
           </div>
           <div class="recipe-body">
             <div class="badge-row">
@@ -796,14 +812,11 @@ function renderRecipes() {
               <span class="badge">${escapeHtml(recipe.active)} aktiv</span>
             </div>
             <div class="recipe-actions">
-              <button class="toggle-button ${favorite ? "active" : ""}" data-action="favorite" data-id="${recipe.id}" aria-label="Herz umschalten">
-                Herz
-              </button>
-              <button class="toggle-button ${later ? "active" : ""}" data-action="later" data-id="${recipe.id}">
-                Später
-              </button>
               <button class="card-button" data-action="detail" data-id="${recipe.id}">
                 Details
+              </button>
+              <button class="card-button plan-card-button" data-action="plan" data-id="${recipe.id}">
+                Planen
               </button>
             </div>
           </div>
@@ -815,6 +828,8 @@ function renderRecipes() {
 
 function renderStarterControls() {
   $("#starterName").value = state.starterName;
+  $("#starterNameTitle").textContent = state.starterName || "Blubber";
+  $("#starterEditor").classList.toggle("is-saved", Boolean(state.starterNameSaved));
   $("#starterMode").value = state.starterMode;
   $("#feedInterval").value = state.feedInterval;
   $("#customFeedHours").value = state.customFeedHours;
@@ -826,6 +841,7 @@ function renderStarterControls() {
       <button class="pet-choice ${state.petId === pet.id ? "active" : ""}" data-pet="${pet.id}">
         <span class="pet-mini ${pet.id}" aria-hidden="true"></span>
         <span>${escapeHtml(pet.name)}</span>
+        <small>${escapeHtml(pet.label)}</small>
       </button>
     `,
   ).join("");
@@ -881,8 +897,9 @@ function openRecipeDetail(recipeId) {
           <ol>${recipe.steps.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ol>
         </div>
       </div>
-      <h3>Anfängerhinweis</h3>
+      <h3>AnfÃ¤ngerhinweis</h3>
       <p>${escapeHtml(recipe.tip)}</p>
+      <button class="primary-button detail-plan-button" data-detail-plan="${recipe.id}">Mit diesem Rezept planen</button>
       <p><small>Bild: ${escapeHtml(recipe.credit)}</small></p>
     </article>
   `;
@@ -900,7 +917,19 @@ function markFedNow() {
   saveState();
   renderStarterControls();
   renderPet();
-  toast(`${state.starterName} wurde als gefüttert gespeichert.`);
+  toast(`${state.starterName} wurde als gefÃ¼ttert gespeichert.`);
+}
+
+function goToPlanner(recipeId) {
+  const recipe = RECIPES.find((item) => item.id === recipeId);
+  if (!recipe) return;
+  const dialog = $("#recipeDialog");
+  if (dialog.open && dialog.close) dialog.close();
+  else dialog.removeAttribute("open");
+  $("#plannerRecipe").value = recipe.id;
+  $$(".tab").find((tab) => tab.dataset.section === "planer").click();
+  $("#plannerDate").focus();
+  toast(`${recipe.title} ist im Planer ausgewÃ¤hlt.`);
 }
 
 function createFeedingEvents() {
@@ -913,11 +942,11 @@ function createFeedingEvents() {
 
   while (current <= endDate && events.length < 80) {
     events.push({
-      title: `${state.starterName || "Sauerteig"} füttern`,
+      title: `${state.starterName || "Sauerteig"} fÃ¼ttern`,
       start: new Date(current),
       end: addHours(current, 0.25),
       description:
-        "Sauerteig füttern: Einen Teil Starter behalten und nach Gewicht mit Wasser und Mehl auffrischen. Danach Anfangsstand markieren.",
+        "Sauerteig fÃ¼ttern: Einen Teil Starter behalten und nach Gewicht mit Wasser und Mehl auffrischen. Danach Anfangsstand markieren.",
     });
     if (range === "next") break;
     current = addHours(current, info.interval);
@@ -955,7 +984,7 @@ function calculatePlan() {
     <p class="eyebrow">${escapeHtml(profile.label)}</p>
     <h3>${escapeHtml(recipe.title)}</h3>
     <p>Start: <strong>${formatDateTime(startTime)}</strong><br />Fertig: <strong>${formatDateTime(finishTime)}</strong></p>
-    <p>${direction === "finish" ? "Rückwärts vom gewünschten Fertig-Zeitpunkt gerechnet." : "Vorwärts ab eurem Start-Zeitpunkt gerechnet."}</p>
+    <p>${direction === "finish" ? "RÃ¼ckwÃ¤rts vom gewÃ¼nschten Fertig-Zeitpunkt gerechnet." : "VorwÃ¤rts ab eurem Start-Zeitpunkt gerechnet."}</p>
   `;
 
   $("#planList").innerHTML = currentPlanEvents
@@ -1072,7 +1101,9 @@ function setupEvents() {
 
   $("#saveName").addEventListener("click", () => {
     state.starterName = $("#starterName").value.trim() || "Blubber";
+    state.starterNameSaved = true;
     saveState();
+    renderStarterControls();
     renderPet();
     toast("Name gespeichert.");
   });
@@ -1081,6 +1112,13 @@ function setupEvents() {
     state.starterName = $("#starterName").value.trim() || "Blubber";
     saveState();
     renderPet();
+  });
+
+  $("#editName").addEventListener("click", () => {
+    state.starterNameSaved = false;
+    saveState();
+    renderStarterControls();
+    $("#starterName").focus();
   });
 
   $("#quickFed").addEventListener("click", markFedNow);
@@ -1126,7 +1164,7 @@ function setupEvents() {
   });
 
   $("#exportFeedingIcs").addEventListener("click", () => {
-    downloadIcs(createFeedingEvents(), "sauerteig-fuetterungen.ics", "Sauerteig Love Fütterungen");
+    downloadIcs(createFeedingEvents(), "sauerteig-fuetterungen.ics", "Sauerteig Love FÃ¼tterungen");
   });
 
   ["recipeSearch", "categoryFilter", "difficultyFilter"].forEach((id) => {
@@ -1148,11 +1186,20 @@ function setupEvents() {
       const active = toggleInArray(state.later, id);
       saveState();
       renderRecipes();
-      toast(active ? "Für später gespeichert." : "Aus später backen entfernt.");
+      toast(active ? "FÃ¼r spÃ¤ter gespeichert." : "Aus spÃ¤ter backen entfernt.");
     }
     if (action === "detail") {
       openRecipeDetail(id);
     }
+    if (action === "plan") {
+      goToPlanner(id);
+    }
+  });
+
+  $("#recipeDetail").addEventListener("click", (event) => {
+    const button = event.target.closest("[data-detail-plan]");
+    if (!button) return;
+    goToPlanner(button.dataset.detailPlan);
   });
 
   $("#closeRecipeDialog").addEventListener("click", () => {
