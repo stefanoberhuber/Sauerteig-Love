@@ -1,14 +1,22 @@
 (function () {
   const STORE_KEY = "sauerteig-love-state-v1";
   const pets = [
-    { id: "codex-blue", name: "Mochi", label: "Blauer Softie", className: "custom-pet-blue" },
-    { id: "codex-sprout", name: "Kiki", label: "Sprossenfreund", className: "custom-pet-sprout" },
-    { id: "codex-toast", name: "Nori", label: "Krustenkumpel", className: "custom-pet-toast" },
+    { id: "sourdough-crumb", name: "Broesel", label: "Weicher Teigfreund", className: "custom-pet-crumb" },
+    { id: "sourdough-rye", name: "Krusti", label: "Roggenlaib", className: "custom-pet-rye" },
+    { id: "sourdough-starter", name: "Blubbi", label: "Starterkern", className: "custom-pet-starter" },
   ];
 
   let patchingPet = false;
   let patchingPicker = false;
   let lastDetailRecipeId = null;
+
+  function ensurePetStyles() {
+    if (document.querySelector('link[href="pet-fixes.css"]')) return;
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = "pet-fixes.css";
+    document.head.append(link);
+  }
 
   function readState() {
     try {
@@ -24,9 +32,9 @@
 
   function currentStatus() {
     const label = document.querySelector("#petStatusLabel")?.textContent || "";
-    if (label.includes("Überfällig")) return "overdue";
+    if (label.includes("Überfällig") || label.includes("Ueberfaellig")) return "overdue";
     if (label.includes("Hungrig")) return "hungry";
-    if (label.includes("Schläft")) return "sleeping";
+    if (label.includes("Schläft") || label.includes("Schlaeft")) return "sleeping";
     if (label.includes("Bereit")) return "ready";
     return "active";
   }
@@ -35,8 +43,10 @@
     const state = readState();
     const name = state.starterName || document.querySelector("#starterName")?.value || "Blubber";
     const saved = Boolean(state.starterNameSaved);
-    document.querySelector("#starterNameTitle").textContent = name;
-    document.querySelector("#starterEditor").classList.toggle("is-saved", saved);
+    const title = document.querySelector("#starterNameTitle");
+    const editor = document.querySelector("#starterEditor");
+    if (title) title.textContent = name;
+    if (editor) editor.classList.toggle("is-saved", saved);
   }
 
   function renderCustomPet(force = false) {
@@ -50,7 +60,11 @@
     const status = currentStatus();
     stage.innerHTML = `
       <div class="custom-pet ${pet.className} custom-pet-${status}" aria-label="${pet.name}">
-        <div class="custom-pet-face"><span></span></div>
+        <div class="custom-pet-face">
+          <span class="pet-sprinkle one"></span>
+          <span class="pet-sprinkle two"></span>
+          <span class="pet-sprinkle three"></span>
+        </div>
       </div>
     `;
     patchingPet = false;
@@ -88,7 +102,7 @@
     select.value = recipeId;
     document.querySelector('[data-section="planer"]')?.click();
     document.querySelector("#plannerDate")?.focus();
-    window.dispatchEvent(new CustomEvent("sauerteig-toast", { detail: `${title} ist im Planer ausgewählt.` }));
+    window.dispatchEvent(new CustomEvent("sauerteig-toast", { detail: `${title} ist im Planer ausgewaehlt.` }));
   }
 
   function decorateRecipeCards() {
@@ -108,10 +122,10 @@
 
       favorite.classList.remove("toggle-button");
       favorite.classList.add("image-action");
-      favorite.textContent = "♥";
+      favorite.textContent = "\u2665";
       later.classList.remove("toggle-button");
       later.classList.add("image-action");
-      later.textContent = "◷";
+      later.textContent = "\u25f7";
       actions.append(favorite, later);
 
       if (!card.querySelector('[data-action="plan"]')) {
@@ -141,6 +155,8 @@
       const name = document.querySelector("#starterName")?.value.trim() || "Blubber";
       writeState({ starterName: name, starterNameSaved: true });
       updateStarterHeader();
+      window.setTimeout(updateStarterHeader, 40);
+      window.setTimeout(() => renderCustomPet(true), 60);
     });
 
     document.querySelector("#editName")?.addEventListener("click", () => {
@@ -149,13 +165,17 @@
       document.querySelector("#starterName")?.focus();
     });
 
-    document.querySelector("#petPicker")?.addEventListener("click", (event) => {
-      const button = event.target.closest("[data-custom-pet]");
+    document.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-custom-pet], [data-pet]");
       if (!button) return;
-      writeState({ petId: button.dataset.customPet });
+      const petId = button.dataset.customPet || button.dataset.pet;
+      if (!pets.some((pet) => pet.id === petId)) return;
+      event.preventDefault();
+      event.stopImmediatePropagation();
+      writeState({ petId });
       renderPetPicker();
       renderCustomPet(true);
-    });
+    }, true);
 
     document.addEventListener(
       "click",
@@ -190,7 +210,7 @@
   function observe() {
     const petStage = document.querySelector("#petStage");
     if (petStage) {
-      new MutationObserver(renderCustomPet).observe(petStage, { childList: true });
+      new MutationObserver(() => renderCustomPet()).observe(petStage, { childList: true });
     }
 
     const recipeGrid = document.querySelector("#recipeGrid");
@@ -210,13 +230,14 @@
   }
 
   function init() {
+    ensurePetStyles();
     const state = readState();
-    if (!state.petId || ["jarling", "blobbi", "krusti", "blubbi", "wolki"].includes(state.petId)) {
+    if (!state.petId || ["jarling", "blobbi", "krusti", "blubbi", "wolki", "codex-blue", "codex-sprout", "codex-toast"].includes(state.petId)) {
       writeState({ petId: pets[0].id });
     }
     updateStarterHeader();
     renderPetPicker();
-    renderCustomPet();
+    renderCustomPet(true);
     decorateRecipeCards();
     decorateRecipeDetail();
     bindEvents();
