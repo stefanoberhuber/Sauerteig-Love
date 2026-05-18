@@ -1,5 +1,12 @@
 (function () {
   const STORE_KEY = "sauerteig-love-state-v1";
+  const PET_IMAGES = {
+    active: "./assets/pet/pet-active.png",
+    ready: "./assets/pet/pet-ready.png",
+    hungry: "./assets/pet/pet-hungry.png",
+    overdue: "./assets/pet/pet-overdue.png",
+    sleeping: "./assets/pet/pet-sleeping.png",
+  };
 
   let lastDetailRecipeId = null;
 
@@ -43,93 +50,11 @@
     if (editor) editor.classList.toggle("is-saved", saved);
   }
 
-  function faceMarkup(status) {
-    if (status === "sleeping") {
-      return `
-        <path class="jar-eye jar-eye-left sleeping" d="M82 109q8 7 16 0" />
-        <path class="jar-eye jar-eye-right sleeping" d="M102 109q8 7 16 0" />
-        <path class="jar-mouth sleeping" d="M93 126q7 5 14 0" />
-      `;
-    }
-
-    if (status === "hungry") {
-      return `
-        <path class="jar-brow left" d="M77 92q10-7 20-3" />
-        <path class="jar-brow right" d="M123 92q-10-7-20-3" />
-        <circle class="jar-eye-open jar-eye-left" cx="90" cy="109" r="9.5" />
-        <circle class="jar-eye-shine" cx="86.5" cy="105.5" r="2.8" />
-        <circle class="jar-eye-open jar-eye-right" cx="110" cy="109" r="9.5" />
-        <circle class="jar-eye-shine" cx="106.5" cy="105.5" r="2.8" />
-        <path class="jar-mouth hungry" d="M93 128q7-6 14 0" />
-      `;
-    }
-
-    if (status === "overdue") {
-      return `
-        <path class="jar-brow left worried" d="M76 92q11-10 21-4" />
-        <path class="jar-brow right worried" d="M124 92q-11-10-21-4" />
-        <circle class="jar-eye-open jar-eye-left" cx="90" cy="109" r="10" />
-        <circle class="jar-eye-shine" cx="86" cy="105" r="3" />
-        <circle class="jar-eye-open jar-eye-right" cx="110" cy="109" r="10" />
-        <circle class="jar-eye-shine" cx="106" cy="105" r="3" />
-        <path class="jar-mouth overdue" d="M96 129q4-6 8 0" />
-      `;
-    }
-
-    return `
-      <circle class="jar-eye-open jar-eye-left" cx="90" cy="108" r="10" />
-      <circle class="jar-eye-shine" cx="86" cy="104" r="3.2" />
-      <circle class="jar-eye-open jar-eye-right" cx="110" cy="108" r="10" />
-      <circle class="jar-eye-shine" cx="106" cy="104" r="3.2" />
-      <path class="jar-mouth happy" d="M90 126q10 12 20 0" />
-      <path class="jar-mouth-tongue" d="M96 136q4 3 8 0" />
-    `;
-  }
-
-  function statusExtras(status) {
-    if (status === "sleeping") {
-      return `
-        <g class="pet-zzz">
-          <text x="145" y="66">z</text>
-          <text x="158" y="49">z</text>
-          <text x="171" y="32">z</text>
-        </g>
-      `;
-    }
-
-    if (status === "ready") {
-      return `
-        <g class="pet-sparkles">
-          <path d="M35 88l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" />
-          <path d="M165 83l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" />
-          <path d="M154 148l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" />
-        </g>
-      `;
-    }
-
-    if (status === "hungry") {
-      return `
-        <g class="pet-hungry-mark">
-          <circle cx="152" cy="61" r="10" />
-          <path d="M152 55v8" />
-          <circle cx="152" cy="68" r="1.6" />
-        </g>
-      `;
-    }
-
-    if (status === "overdue") {
-      return `
-        <g class="pet-alert-marks">
-          <path d="M36 77l-12-15" />
-          <path d="M48 71l-5-18" />
-          <path d="M164 77l12-15" />
-          <path d="M152 71l5-18" />
-          <path class="sweat" d="M55 102c7-11 15-8 11 3-2 6-7 10-12 8-4-2-2-6 1-11Z" />
-        </g>
-      `;
-    }
-
-    return "";
+  function preloadPetImages() {
+    Object.values(PET_IMAGES).forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
   }
 
   function renderCustomPet(force) {
@@ -151,82 +76,17 @@
       "beforeend",
       `
         <div class="single-pet pet-state-${status}" data-status="${status}" aria-label="${name}, ein süßes Sauerteig-Pet im Glas">
-          <svg class="single-pet-svg" viewBox="0 0 200 200" role="img" aria-hidden="true">
-            <defs>
-              <linearGradient id="jarGlass" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#f7fffb" stop-opacity="0.88" />
-                <stop offset="0.46" stop-color="#dff6f2" stop-opacity="0.25" />
-                <stop offset="1" stop-color="#ffffff" stop-opacity="0.72" />
-              </linearGradient>
-              <linearGradient id="starterFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#fff0bd" />
-                <stop offset="0.54" stop-color="#f5c46e" />
-                <stop offset="1" stop-color="#d88942" />
-              </linearGradient>
-              <linearGradient id="clothFill" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stop-color="#fff0c4" />
-                <stop offset="1" stop-color="#dfae67" />
-              </linearGradient>
-              <linearGradient id="twineFill" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stop-color="#e9a13f" />
-                <stop offset="1" stop-color="#9d5a25" />
-              </linearGradient>
-            </defs>
-
-            <ellipse class="pet-ground-shadow" cx="100" cy="181" rx="56" ry="11" />
-
-            <g class="pet-bob">
-              ${statusExtras(status)}
-
-              <g class="pet-arms">
-                <path class="pet-arm left" d="M48 116c-10 3-16 11-15 20 1 9 8 14 16 12 7-2 11-8 12-16l-3-11c-3-4-6-6-10-5Z" />
-                <path class="pet-arm right" d="M152 116c10 3 16 11 15 20-1 9-8 14-16 12-7-2-11-8-12-16l3-11c3-4 6-6 10-5Z" />
-              </g>
-
-              <g class="pet-legs">
-                <path class="pet-leg left" d="M76 159c-8 7-12 13-11 20 1 6 6 9 14 8 9-1 15-5 15-11 0-7-7-12-13-18Z" />
-                <path class="pet-leg right" d="M124 159c8 7 12 13 11 20-1 6-6 9-14 8-9-1-15-5-15-11 0-7 7-12 13-18Z" />
-              </g>
-
-              <g class="jar-body">
-                <rect class="jar-outline" x="34" y="49" width="132" height="118" rx="34" />
-                <path class="starter-shape" d="M39 96c14-6 25 5 39 0 15-5 27 6 42 1 13-4 25-1 37 4v35c0 19-15 33-34 33H77c-21 0-38-15-38-35Z" />
-                <path class="starter-foam" d="M44 94c11-9 25 4 37-2 14-7 26 4 39-2 11-5 24-1 32 7" />
-
-                <g class="pet-bubbles">
-                  <circle cx="70" cy="109" r="4.2" />
-                  <circle cx="81" cy="136" r="5.1" />
-                  <circle cx="93" cy="103" r="3.4" />
-                  <circle cx="116" cy="136" r="5.2" />
-                  <circle cx="129" cy="108" r="4.1" />
-                  <circle cx="139" cy="125" r="3.6" />
-                  <circle cx="90" cy="148" r="3.2" />
-                  <circle cx="111" cy="116" r="2.7" />
-                </g>
-
-                <path class="jar-glass" d="M46 63v76c0 15 12 27 27 27h54c15 0 27-12 27-27V63" />
-                <path class="jar-shine left" d="M49 73c-5 25-5 49 2 72" />
-                <path class="jar-shine right" d="M151 73c5 25 5 49-2 72" />
-
-                <g class="pet-face">
-                  <circle class="jar-cheek left" cx="80" cy="119" r="6.3" />
-                  <circle class="jar-cheek right" cx="120" cy="119" r="6.3" />
-                  ${faceMarkup(status)}
-                </g>
-              </g>
-
-              <g class="pet-lid">
-                <path class="cloth-top" d="M53 31h94c16 0 27 11 27 26 0 10-7 18-15 22-12 5-23-2-36 2-14 5-25-3-40 1-17 4-28-2-37-9-9-7-12-16-9-25 3-10 10-17 16-17Z" />
-                <path class="cloth-skirt" d="M34 66c14 12 28 12 41 5 12 9 29 9 44 1 14 7 29 5 46-7 4 12-1 24-13 29-12 4-23-3-35 3-13 7-28 6-42-1-11 5-24 4-36-2-11-5-14-17-5-28Z" />
-                <path class="twine-line" d="M37 66c37 11 89 11 126 0" />
-                <path class="bow-loop left" d="M95 62c-17-14-30-8-29 4 2 12 17 11 29-4Z" />
-                <path class="bow-loop right" d="M105 62c17-14 30-8 29 4-2 12-17 11-29-4Z" />
-                <circle class="bow-knot" cx="100" cy="64" r="6" />
-                <path class="bow-tail left" d="M96 69c-5 8-10 16-17 22" />
-                <path class="bow-tail right" d="M104 69c5 8 10 16 17 22" />
-              </g>
-            </g>
-          </svg>
+          <span class="pet-shadow" aria-hidden="true"></span>
+          <img
+            class="single-pet-image"
+            src="${PET_IMAGES[status] || PET_IMAGES.active}"
+            alt="${name}, ein süßes Sauerteig-Pet im Glas"
+            draggable="false"
+          />
+          ${status === "sleeping" ? '<span class="pet-fx pet-fx-sleep" aria-hidden="true">z</span>' : ""}
+          ${status === "ready" ? '<span class="pet-fx pet-fx-spark one" aria-hidden="true">✦</span><span class="pet-fx pet-fx-spark two" aria-hidden="true">✦</span>' : ""}
+          ${status === "hungry" ? '<span class="pet-fx pet-fx-hungry" aria-hidden="true">!</span>' : ""}
+          ${status === "overdue" ? '<span class="pet-fx pet-fx-alert left" aria-hidden="true"></span><span class="pet-fx pet-fx-alert right" aria-hidden="true"></span>' : ""}
         </div>
       `,
     );
@@ -365,6 +225,7 @@
 
   function init() {
     migrateState();
+    preloadPetImages();
     syncPetUi(true);
     decorateRecipeCards();
     decorateRecipeDetail();
