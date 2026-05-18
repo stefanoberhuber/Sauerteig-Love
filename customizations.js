@@ -72,7 +72,7 @@
   function renderCustomPet(force) {
     const stage = document.querySelector("#petStage");
     if (!stage) return;
-    if (!force && stage.firstElementChild?.classList.contains("custom-pet")) return;
+    if (!force && stage.querySelector(".custom-pet")) return;
     const state = readState();
     const pet = getPet(state.petId);
     const status = currentStatus();
@@ -88,7 +88,8 @@
       status === "sleeping" ? '<text x="122" y="34" class="pet-status-text">z</text>' :
       status === "ready" ? '<g class="pet-spark"><circle cx="26" cy="44" r="4"/><circle cx="134" cy="56" r="5"/><circle cx="122" cy="114" r="4"/></g>' :
       '';
-    stage.innerHTML = `
+    stage.querySelector(".custom-pet")?.remove();
+    stage.insertAdjacentHTML("beforeend", `
       <div class="custom-pet ${pet.className} custom-pet-${status}" aria-label="${pet.name}">
         <svg class="pet-svg" viewBox="0 0 160 170" role="img" aria-hidden="true">
           <g class="pet-shell">
@@ -114,7 +115,7 @@
           </g>
         </svg>
       </div>
-    `;
+    `);
   }
 
   function syncPetUi(force) {
@@ -226,7 +227,7 @@
     const petStage = document.querySelector("#petStage");
     if (petStage) {
       new MutationObserver(() => {
-        if (!petStage.firstElementChild?.classList.contains("custom-pet")) {
+        if (!petStage.querySelector(".custom-pet")) {
           renderCustomPet(true);
         }
       }).observe(petStage, { childList: true });
