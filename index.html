@@ -27,7 +27,7 @@
       </header>
 
       <section class="pet-dashboard" aria-label="Starter Status">
-        <div class="pet-copy">
+        <div class="pet-copy" id="starterEditor">
           <p class="eyebrow">Gemeinsamer Starter</p>
           <label class="starter-name-label" for="starterName">Name</label>
           <div class="name-row">
@@ -45,6 +45,11 @@
           </div>
         </div>
         <div class="pet-stage-wrap">
+          <div class="pet-title-bar">
+            <span>Gemeinsamer Starter</span>
+            <strong id="starterNameTitle">Blubber</strong>
+            <button id="editName" type="button">Ändern</button>
+          </div>
           <div id="petStage" class="pet-stage" aria-live="polite"></div>
           <p id="nextFeedingText" class="next-feeding"></p>
         </div>
@@ -252,5 +257,7 @@
 
     <div class="toast" id="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
+    <link rel="stylesheet" href="overrides.css" />
+    <script src="customizations.js"></script>
   </body>
 </html>
