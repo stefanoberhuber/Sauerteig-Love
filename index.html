@@ -127,12 +127,11 @@
             <button id="exportFeedingIcs" class="primary-button">Fütterungen exportieren</button>
           </div>
 
-          <div class="settings-grid">
-            <article class="settings-card">
-              <h3>Pet auswählen</h3>
-              <div class="pet-picker" id="petPicker"></div>
-            </article>
+          <!-- Hidden legacy mount point so app.js can still render without errors.
+               The visible pet selector is intentionally removed; the app now uses one fixed pet. -->
+          <div class="pet-picker" id="petPicker" hidden></div>
 
+          <div class="settings-grid single-settings-grid">
             <article class="settings-card">
               <h3>Fütterung</h3>
               <div class="form-stack">
