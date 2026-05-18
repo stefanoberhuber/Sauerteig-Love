@@ -223,6 +223,15 @@
   }
 
   function bindObservers() {
+    const petStage = document.querySelector("#petStage");
+    if (petStage) {
+      new MutationObserver(() => {
+        if (!petStage.firstElementChild?.classList.contains("custom-pet")) {
+          renderCustomPet(true);
+        }
+      }).observe(petStage, { childList: true });
+    }
+
     const recipeGrid = document.querySelector("#recipeGrid");
     if (recipeGrid) {
       new MutationObserver(decorateRecipeCards).observe(recipeGrid, { childList: true, subtree: true });
