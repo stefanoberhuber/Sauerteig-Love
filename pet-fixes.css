@@ -1,0 +1,188 @@
+.custom-pet {
+  width: 146px;
+  height: 146px;
+}
+
+.custom-pet::before {
+  inset: 10px 10px 18px;
+  border: 3px solid #8a5a33;
+  border-radius: 42% 44% 34% 36%;
+  background:
+    radial-gradient(circle at 18% 28%, #f8d49a 0 22px, transparent 23px),
+    radial-gradient(circle at 78% 30%, #eebd78 0 24px, transparent 25px),
+    radial-gradient(circle at 24% 76%, #d8914f 0 24px, transparent 25px),
+    radial-gradient(circle at 80% 72%, #bd713d 0 24px, transparent 25px),
+    linear-gradient(180deg, #f4bf78, #ca7a40);
+  box-shadow:
+    inset 0 -11px 0 rgba(116, 69, 37, 0.18),
+    0 14px 24px rgba(92, 60, 28, 0.16);
+}
+
+.custom-pet::after {
+  left: 39px;
+  right: 39px;
+  bottom: 2px;
+  height: 38px;
+  border-color: #8a5a33;
+  background: linear-gradient(180deg, #db914f, #a86235);
+}
+
+.custom-pet-face {
+  inset: 28px 24px 26px;
+  border-color: #8a5a33;
+  border-radius: 32px;
+  background:
+    radial-gradient(circle at 26px 28px, rgba(255, 246, 218, 0.42) 0 12px, transparent 13px),
+    linear-gradient(180deg, #f3c883, #d78a48 58%, #b96b39);
+}
+
+.custom-pet-face::before {
+  top: 39px;
+  left: 27px;
+  width: 19px;
+  height: 6px;
+  background: #2f241c;
+  box-shadow: 43px 0 0 #2f241c;
+}
+
+.custom-pet-face::after {
+  top: 61px;
+  width: 21px;
+  height: 6px;
+  background: #2f241c;
+}
+
+.pet-sprinkle {
+  position: absolute;
+  z-index: 2;
+  border-radius: 999px;
+  background: rgba(255, 247, 221, 0.56);
+}
+
+.pet-sprinkle.one {
+  left: 18px;
+  top: 18px;
+  width: 28px;
+  height: 14px;
+  transform: rotate(-18deg);
+}
+
+.pet-sprinkle.two {
+  right: 22px;
+  top: 18px;
+  width: 9px;
+  height: 9px;
+}
+
+.pet-sprinkle.three {
+  left: 28px;
+  bottom: 20px;
+  width: 36px;
+  height: 7px;
+  background: rgba(142, 88, 48, 0.2);
+}
+
+.custom-pet-crumb::before {
+  background:
+    radial-gradient(circle at 18% 28%, #ffe5ad 0 22px, transparent 23px),
+    radial-gradient(circle at 78% 30%, #f4c783 0 24px, transparent 25px),
+    radial-gradient(circle at 24% 76%, #dd9655 0 24px, transparent 25px),
+    radial-gradient(circle at 80% 72%, #bf733f 0 24px, transparent 25px),
+    linear-gradient(180deg, #f8c985, #ce7e42);
+}
+
+.custom-pet-rye::before {
+  border-color: #5e3d2b;
+  background:
+    radial-gradient(circle at 18% 28%, #cf955c 0 22px, transparent 23px),
+    radial-gradient(circle at 78% 30%, #b97742 0 24px, transparent 25px),
+    radial-gradient(circle at 24% 76%, #85502f 0 24px, transparent 25px),
+    radial-gradient(circle at 80% 72%, #633921 0 24px, transparent 25px),
+    linear-gradient(180deg, #b97642, #6f3f25);
+}
+
+.custom-pet-rye::after,
+.custom-pet-rye .custom-pet-face {
+  border-color: #5e3d2b;
+}
+
+.custom-pet-rye .custom-pet-face {
+  background:
+    linear-gradient(110deg, transparent 0 28%, rgba(255, 229, 175, 0.72) 29% 34%, transparent 35%),
+    linear-gradient(180deg, #b97843, #7c482b 58%, #60351f);
+}
+
+.custom-pet-starter::before {
+  border-color: #9f6a35;
+  background:
+    radial-gradient(circle at 18% 28%, #fff1bd 0 22px, transparent 23px),
+    radial-gradient(circle at 78% 30%, #f6d98d 0 24px, transparent 25px),
+    radial-gradient(circle at 24% 76%, #e2a553 0 24px, transparent 25px),
+    radial-gradient(circle at 80% 72%, #c9843d 0 24px, transparent 25px),
+    linear-gradient(180deg, #f9da91, #d39043);
+}
+
+.custom-pet-starter .custom-pet-face {
+  border-color: #9f6a35;
+  background:
+    radial-gradient(circle at 22px 68px, rgba(255, 255, 255, 0.48) 0 7px, transparent 8px),
+    radial-gradient(circle at 80px 24px, rgba(255, 255, 255, 0.36) 0 5px, transparent 6px),
+    linear-gradient(180deg, #f7dc9a, #dd9a4c 58%, #bf773c);
+}
+
+.custom-pet-hungry .custom-pet-face::after {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+}
+
+.custom-pet-overdue .custom-pet-face::after {
+  width: 24px;
+  height: 7px;
+  border-radius: 999px 999px 0 0;
+}
+
+.custom-pet-ready .custom-pet-face::after {
+  width: 28px;
+  height: 14px;
+  border-radius: 0 0 999px 999px;
+}
+
+.pet-mini.sourdough-crumb,
+.pet-mini.sourdough-rye,
+.pet-mini.sourdough-starter {
+  position: relative;
+  border-color: #8a5a33;
+  border-radius: 15px 15px 12px 12px;
+  background: linear-gradient(180deg, #f3c883, #b96b39);
+  box-shadow:
+    -8px 2px 0 -3px #f6d79c,
+    8px 2px 0 -3px #c77840,
+    0 9px 0 -4px #a86235;
+}
+
+.pet-mini.sourdough-crumb::before,
+.pet-mini.sourdough-rye::before,
+.pet-mini.sourdough-starter::before {
+  content: "";
+  position: absolute;
+  left: 11px;
+  top: 19px;
+  width: 8px;
+  height: 3px;
+  border-radius: 999px;
+  background: #2f241c;
+  box-shadow: 14px 0 0 #2f241c;
+}
+
+.pet-mini.sourdough-rye {
+  border-color: #5e3d2b;
+  background: linear-gradient(180deg, #b97843, #60351f);
+}
+
+.pet-mini.sourdough-starter {
+  border-color: #9f6a35;
+  background:
+    radial-gradient(circle at 12px 30px, rgba(255, 255, 255, 0.48) 0 4px, transparent 5px),
+    linear-gradient(180deg, #f7dc9a, #bf773c);
+}
