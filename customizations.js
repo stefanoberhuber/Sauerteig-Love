@@ -1,12 +1,5 @@
 (function () {
   const STORE_KEY = "sauerteig-love-state-v1";
-  const PET_IMAGES = {
-    active: "./assets/pet/pet-active.png",
-    ready: "./assets/pet/pet-ready.png",
-    hungry: "./assets/pet/pet-hungry.png",
-    overdue: "./assets/pet/pet-overdue.png",
-    sleeping: "./assets/pet/pet-sleeping.png",
-  };
 
   let lastDetailRecipeId = null;
 
@@ -50,11 +43,187 @@
     if (editor) editor.classList.toggle("is-saved", saved);
   }
 
-  function preloadPetImages() {
-    Object.values(PET_IMAGES).forEach((src) => {
-      const image = new Image();
-      image.src = src;
-    });
+  function openEye(x, y, size = 11) {
+    return `
+      <g class="eye-group" transform="translate(${x} ${y})">
+        <ellipse class="eye-white" cx="0" cy="0" rx="${size * 0.92}" ry="${size}" />
+        <circle class="eye-iris" cx="0" cy="1.4" r="${size * 0.86}" />
+        <circle class="eye-pupil" cx="0.4" cy="2.1" r="${size * 0.48}" />
+        <circle class="eye-highlight big" cx="${-size * 0.34}" cy="${-size * 0.3}" r="${size * 0.31}" />
+        <circle class="eye-highlight small" cx="${size * 0.18}" cy="${size * 0.32}" r="${size * 0.13}" />
+      </g>
+    `;
+  }
+
+  function faceMarkup(status) {
+    if (status === "sleeping") {
+      return `
+        <path class="jar-brow soft left" d="M84 106q6-4 14 0" />
+        <path class="jar-brow soft right" d="M102 106q6-4 14 0" />
+        <path class="jar-eye sleeping left" d="M84 112q7 6 14 0" />
+        <path class="jar-eye sleeping right" d="M102 112q7 6 14 0" />
+        <path class="jar-mouth sleeping" d="M92 129q8 5 16 0" />
+      `;
+    }
+
+    if (status === "hungry") {
+      return `
+        <path class="jar-brow left" d="M82 103q8-7 17-2" />
+        <path class="jar-brow right" d="M118 103q-8-7-17-2" />
+        ${openEye(90, 114, 10)}
+        ${openEye(110, 114, 10)}
+        <path class="jar-mouth hungry" d="M93 131q7-6 14 0" />
+      `;
+    }
+
+    if (status === "overdue") {
+      return `
+        <path class="jar-brow worried left" d="M81 102q10-10 18-3" />
+        <path class="jar-brow worried right" d="M119 102q-10-10-18-3" />
+        ${openEye(89, 114, 10.4)}
+        ${openEye(111, 114, 10.4)}
+        <path class="jar-mouth overdue" d="M95 131q5-7 10 0" />
+      `;
+    }
+
+    return `
+      ${openEye(90, 114, 10.8)}
+      ${openEye(110, 114, 10.8)}
+      <path class="jar-mouth happy" d="M90 130q10 12 20 0" />
+      <path class="jar-mouth-tongue" d="M96 140q4 3 8 0" />
+    `;
+  }
+
+  function statusExtras(status) {
+    if (status === "sleeping") {
+      return `
+        <g class="pet-zzz">
+          <text x="146" y="66">z</text>
+          <text x="159" y="50">z</text>
+          <text x="171" y="33">z</text>
+        </g>
+      `;
+    }
+
+    if (status === "ready") {
+      return `
+        <g class="pet-sparkles">
+          <path d="M36 98l4 8 8 4-8 4-4 8-4-8-8-4 8-4z" />
+          <path d="M165 92l3 7 7 3-7 3-3 7-3-7-7-3 7-3z" />
+          <path d="M153 154l3 6 6 3-6 3-3 6-3-6-6-3 6-3z" />
+        </g>
+      `;
+    }
+
+    if (status === "hungry") {
+      return `
+        <g class="pet-hungry-mark">
+          <circle cx="152" cy="72" r="10" />
+          <path d="M152 66v8" />
+          <circle class="dot" cx="152" cy="79" r="1.6" />
+        </g>
+      `;
+    }
+
+    if (status === "overdue") {
+      return `
+        <g class="pet-alert-marks">
+          <path d="M36 88l-12-15" />
+          <path d="M48 82l-5-18" />
+          <path d="M164 88l12-15" />
+          <path d="M152 82l5-18" />
+          <path class="sweat" d="M53 108c7-11 15-8 11 3-2 6-7 10-12 8-4-2-2-6 1-11Z" />
+        </g>
+      `;
+    }
+
+    return "";
+  }
+
+  function petSvg(status) {
+    return `
+      <svg class="single-pet-svg" viewBox="0 0 200 200" role="img" aria-hidden="true">
+        <defs>
+          <linearGradient id="clothTopFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff2d2" />
+            <stop offset="1" stop-color="#e7be83" />
+          </linearGradient>
+          <linearGradient id="clothSkirtFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fbe8bf" />
+            <stop offset="1" stop-color="#d9aa67" />
+          </linearGradient>
+          <linearGradient id="twineFill" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#efab3a" />
+            <stop offset="1" stop-color="#9b5a21" />
+          </linearGradient>
+          <linearGradient id="starterFill" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#fff3c6" />
+            <stop offset="0.52" stop-color="#f4d48b" />
+            <stop offset="1" stop-color="#dfaa53" />
+          </linearGradient>
+          <linearGradient id="eyeIris" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#5c2d0f" />
+            <stop offset="1" stop-color="#1d0d06" />
+          </linearGradient>
+        </defs>
+
+        <ellipse class="pet-ground-shadow" cx="100" cy="184" rx="42" ry="8" />
+
+        <g class="pet-bob">
+          ${statusExtras(status)}
+
+          <g class="pet-lid">
+            <path class="cloth-top" d="M54 29c20-4 72-4 92 0 10 2 18 9 18 18 0 12-7 18-20 19H56c-13-1-20-7-20-19 0-9 8-16 18-18Z" />
+            <path class="cloth-skirt" d="M34 62c12 8 26 11 39 6 12 6 28 7 40 2 13 6 29 5 50-6 2 7 0 15-7 20-10 6-22 4-35 4H79c-12 0-24 2-34-4-8-4-11-12-11-22Z" />
+            <path class="twine-line" d="M36 60c36 12 87 12 126 0" />
+            <path class="bow-loop left" d="M122 57c-17-13-29-8-28 3 1 12 16 12 28-3Z" />
+            <path class="bow-loop right" d="M136 56c19-12 33-5 32 6-1 12-17 12-32-6Z" />
+            <circle class="bow-knot" cx="129" cy="59" r="5.8" />
+            <path class="bow-tail left" d="M127 65c-4 8-8 16-14 22" />
+            <path class="bow-tail right" d="M133 64c6 10 12 19 17 25" />
+          </g>
+
+          <g class="pet-arms">
+            <path class="pet-arm left" d="M43 128c-7 2-12 9-12 17 0 8 6 13 13 13 8 0 14-6 14-13 0-8-5-16-15-17Z" />
+            <path class="pet-arm right" d="M157 128c7 2 12 9 12 17 0 8-6 13-13 13-8 0-14-6-14-13 0-8 5-16 15-17Z" />
+          </g>
+
+          <g class="pet-legs">
+            <path class="pet-leg left" d="M80 169c-8 5-11 10-11 16 1 6 5 9 13 9 8 0 14-4 14-10 0-6-5-11-16-15Z" />
+            <path class="pet-leg right" d="M120 169c8 5 11 10 11 16-1 6-5 9-13 9-8 0-14-4-14-10 0-6 5-11 16-15Z" />
+          </g>
+
+          <g class="jar-body">
+            <path class="jar-outer" d="M57 73c0-8 4-14 11-17 9-4 18-5 32-5h0c14 0 23 1 32 5 7 3 11 9 11 17v71c0 18-13 31-31 31H88c-18 0-31-13-31-31Z" />
+            <path class="starter-shape" d="M61 91c10-6 20 4 31 0 13-5 23 5 36 1 11-3 21-1 31 5v47c0 17-12 29-29 29H70c-17 0-29-12-29-29Z" />
+            <path class="starter-foam" d="M65 88c11-8 20 4 30-1 12-6 23 4 35-1 11-4 21-1 28 6" />
+            <g class="pet-bubbles">
+              <circle cx="73" cy="98" r="6" />
+              <circle cx="87" cy="104" r="3.8" />
+              <circle cx="100" cy="96" r="5.2" />
+              <circle cx="114" cy="103" r="3.2" />
+              <circle cx="126" cy="98" r="5.4" />
+              <circle cx="138" cy="106" r="3.8" />
+              <circle cx="79" cy="136" r="4.4" />
+              <circle cx="92" cy="149" r="5.5" />
+              <circle cx="109" cy="140" r="3.8" />
+              <circle cx="123" cy="152" r="5.2" />
+              <circle cx="133" cy="132" r="3.6" />
+            </g>
+
+            <path class="jar-inner-line" d="M64 78c0-7 3-12 9-14 8-4 15-5 27-5h0c12 0 19 1 27 5 6 2 9 7 9 14v67c0 15-11 26-26 26H90c-15 0-26-11-26-26Z" />
+            <path class="jar-shine left" d="M67 78c-4 14-5 41 0 68" />
+            <path class="jar-shine right" d="M135 78c3 14 4 40 0 66" />
+
+            <g class="pet-face">
+              <circle class="jar-cheek left" cx="78" cy="126" r="7.5" />
+              <circle class="jar-cheek right" cx="122" cy="126" r="7.5" />
+              ${faceMarkup(status)}
+            </g>
+          </g>
+        </g>
+      </svg>
+    `;
   }
 
   function renderCustomPet(force) {
@@ -76,17 +245,7 @@
       "beforeend",
       `
         <div class="single-pet pet-state-${status}" data-status="${status}" aria-label="${name}, ein süßes Sauerteig-Pet im Glas">
-          <span class="pet-shadow" aria-hidden="true"></span>
-          <img
-            class="single-pet-image"
-            src="${PET_IMAGES[status] || PET_IMAGES.active}"
-            alt="${name}, ein süßes Sauerteig-Pet im Glas"
-            draggable="false"
-          />
-          ${status === "sleeping" ? '<span class="pet-fx pet-fx-sleep" aria-hidden="true">z</span>' : ""}
-          ${status === "ready" ? '<span class="pet-fx pet-fx-spark one" aria-hidden="true">✦</span><span class="pet-fx pet-fx-spark two" aria-hidden="true">✦</span>' : ""}
-          ${status === "hungry" ? '<span class="pet-fx pet-fx-hungry" aria-hidden="true">!</span>' : ""}
-          ${status === "overdue" ? '<span class="pet-fx pet-fx-alert left" aria-hidden="true"></span><span class="pet-fx pet-fx-alert right" aria-hidden="true"></span>' : ""}
+          ${petSvg(status)}
         </div>
       `,
     );
@@ -225,7 +384,6 @@
 
   function init() {
     migrateState();
-    preloadPetImages();
     syncPetUi(true);
     decorateRecipeCards();
     decorateRecipeDetail();
