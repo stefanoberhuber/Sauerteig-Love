@@ -76,13 +76,43 @@
     const state = readState();
     const pet = getPet(state.petId);
     const status = currentStatus();
+    const eyes =
+      status === "sleeping"
+        ? '<path class="pet-eye" d="M49 66h16" /><path class="pet-eye" d="M95 66h16" />'
+        : '<path class="pet-eye" d="M49 62q8 7 16 0" /><path class="pet-eye" d="M95 62q8 7 16 0" />';
+    let mouth = '<path class="pet-mouth" d="M69 90q11 8 22 0" />';
+    if (status === "hungry") mouth = '<circle class="pet-mouth-open" cx="80" cy="92" r="8" />';
+    if (status === "overdue") mouth = '<path class="pet-mouth" d="M69 95q11-7 22 0" />';
+    if (status === "ready") mouth = '<path class="pet-mouth" d="M66 89q14 13 28 0" />';
+    const statusBadge =
+      status === "sleeping"
+        ? '<text x="122" y="34" class="pet-status-text">z</text>'
+        : status === "ready"
+          ? '<g class="pet-spark"><circle cx="26" cy="44" r="4"/><circle cx="134" cy="56" r="5"/><circle cx="122" cy="114" r="4"/></g>'
+          : "";
+
     stage.innerHTML = `
       <div class="custom-pet ${pet.className} custom-pet-${status}" aria-label="${pet.name}">
-        <div class="custom-pet-face">
-          <span class="pet-sprinkle one"></span>
-          <span class="pet-sprinkle two"></span>
-          <span class="pet-sprinkle three"></span>
-        </div>
+        <svg class="pet-svg" viewBox="0 0 160 170" role="img" aria-hidden="true">
+          <g class="pet-shell">
+            <path class="pet-arm left" d="M28 86c-8 1-14 9-14 18s7 17 16 17c6 0 10-3 13-8l4-10-5-13c-3-3-8-5-14-4Z" />
+            <path class="pet-arm right" d="M132 86c8 1 14 9 14 18s-7 17-16 17c-6 0-10-3-13-8l-4-10 5-13c3-3 8-5 14-4Z" />
+            <path class="pet-leg left" d="M58 132c-8 7-11 14-11 22 0 7 5 11 12 11h14c6 0 11-4 11-10 0-11-7-18-14-25Z" />
+            <path class="pet-leg right" d="M102 132c8 7 11 14 11 22 0 7-5 11-12 11H87c-6 0-11-4-11-10 0-11 7-18 14-25Z" />
+            <rect class="pet-body" x="34" y="26" width="92" height="112" rx="34" />
+            <rect class="pet-visor" x="54" y="40" width="52" height="20" rx="10" />
+            <path class="pet-belly" d="M52 56h56c10 0 18 8 18 18v30c0 20-16 36-36 36H70c-20 0-36-16-36-36V74c0-10 8-18 18-18Z" />
+            <path class="pet-highlight" d="M63 52c-11 17-14 42-8 58" />
+            <circle class="pet-crumb one" cx="69" cy="60" r="4" />
+            <circle class="pet-crumb two" cx="99" cy="64" r="5" />
+            <circle class="pet-crumb three" cx="109" cy="83" r="3.5" />
+            ${eyes}
+            ${mouth}
+            <circle class="pet-cheek left" cx="56" cy="86" r="7" />
+            <circle class="pet-cheek right" cx="104" cy="86" r="7" />
+            ${statusBadge}
+          </g>
+        </svg>
       </div>
     `;
   }
