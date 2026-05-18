@@ -1,4 +1,4 @@
-const CACHE_NAME = "sauerteig-love-v7";
+const CACHE_NAME = "sauerteig-love-v8";
 const APP_SHELL = [
   "./",
   "./index.html",
@@ -9,7 +9,11 @@ const APP_SHELL = [
   "./customizations.js",
   "./manifest.webmanifest",
   "./icon.svg",
-  "./assets/pet-sourdough-jar.png",
+  "./assets/pet/pet-active.png",
+  "./assets/pet/pet-ready.png",
+  "./assets/pet/pet-hungry.png",
+  "./assets/pet/pet-overdue.png",
+  "./assets/pet/pet-sleeping.png",
 ];
 
 self.addEventListener("install", (event) => {

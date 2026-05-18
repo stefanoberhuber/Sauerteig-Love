@@ -1,6 +1,12 @@
 (function () {
   const STORE_KEY = "sauerteig-love-state-v1";
-  const PET_IMAGE_SRC = "./assets/pet-sourdough-jar.png";
+  const PET_IMAGES = {
+    active: "./assets/pet/pet-active.png",
+    ready: "./assets/pet/pet-ready.png",
+    hungry: "./assets/pet/pet-hungry.png",
+    overdue: "./assets/pet/pet-overdue.png",
+    sleeping: "./assets/pet/pet-sleeping.png",
+  };
 
   let lastDetailRecipeId = null;
 
@@ -44,14 +50,23 @@
     if (editor) editor.classList.toggle("is-saved", saved);
   }
 
+  function preloadPetImages() {
+    Object.values(PET_IMAGES).forEach((src) => {
+      const image = new Image();
+      image.src = src;
+    });
+  }
+
   function renderCustomPet(force) {
     const stage = document.querySelector("#petStage");
     if (!stage) return;
-    if (!force && stage.querySelector(".single-pet")) return;
 
     const state = readState();
     const name = state.starterName || document.querySelector("#starterName")?.value.trim() || "Sauerteig";
     const status = currentStatus();
+    const existing = stage.querySelector(".single-pet");
+
+    if (!force && existing?.dataset.status === status) return;
 
     stage.querySelector(".pet-character")?.remove();
     stage.querySelector(".custom-pet")?.remove();
@@ -60,13 +75,18 @@
     stage.insertAdjacentHTML(
       "beforeend",
       `
-        <div class="single-pet pet-state-${status}" aria-label="${name}, ein süßes Sauerteig-Pet im Glas">
+        <div class="single-pet pet-state-${status}" data-status="${status}" aria-label="${name}, ein süßes Sauerteig-Pet im Glas">
+          <span class="pet-shadow" aria-hidden="true"></span>
           <img
             class="single-pet-image"
-            src="${PET_IMAGE_SRC}"
+            src="${PET_IMAGES[status] || PET_IMAGES.active}"
             alt="${name}, ein süßes Sauerteig-Pet im Glas"
             draggable="false"
           />
+          ${status === "sleeping" ? '<span class="pet-fx pet-fx-sleep" aria-hidden="true">z</span>' : ""}
+          ${status === "ready" ? '<span class="pet-fx pet-fx-spark one" aria-hidden="true">✦</span><span class="pet-fx pet-fx-spark two" aria-hidden="true">✦</span>' : ""}
+          ${status === "hungry" ? '<span class="pet-fx pet-fx-hungry" aria-hidden="true">!</span>' : ""}
+          ${status === "overdue" ? '<span class="pet-fx pet-fx-alert left" aria-hidden="true"></span><span class="pet-fx pet-fx-alert right" aria-hidden="true"></span>' : ""}
         </div>
       `,
     );
@@ -205,6 +225,7 @@
 
   function init() {
     migrateState();
+    preloadPetImages();
     syncPetUi(true);
     decorateRecipeCards();
     decorateRecipeDetail();
